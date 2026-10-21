@@ -1,0 +1,258 @@
+/* Alternativa A · «El nivel»
+   DetoxPlus servido es el protagonista. Un campo lima sube hasta el nivel de la
+   bebida y continúa a todo el ancho detrás de la acción de pedido. */
+
+.hA {
+  /* Ancho de contenido y alto de la foto en móvil (cuadrada, 80 % del ancho). */
+  --cw: calc(100vw - 2 * var(--g));
+  --foto: min(calc(var(--cw) * 0.8), 24rem);
+  --nivel: 0.42; /* altura relativa del líquido en la foto */
+  overflow-x: clip;
+  padding-top: 1rem;
+}
+
+.hA__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto calc(var(--foto) * var(--nivel)) calc(var(--foto) * (1 - var(--nivel))) auto;
+  grid-template-areas:
+    'msg'
+    'foto'
+    'foto'
+    'accion';
+}
+
+/* El campo lima: de la línea del líquido hacia abajo, a todo el ancho de la ventana. */
+.hA__grid::before {
+  content: '';
+  grid-row: 3 / 5;
+  grid-column: 1 / -1;
+  /* Sangrado a todo el ancho sin alterar el tamaño de las columnas. */
+  margin-inline: calc(50% - 50vw);
+  background: var(--lima);
+  transform-origin: bottom;
+}
+
+.hA__msg {
+  grid-area: msg;
+  padding-bottom: 1.1rem;
+}
+
+.hA__titulo {
+  font-size: clamp(2.05rem, 1.25rem + 3.4vw, 3.75rem);
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.hA__lead {
+  max-width: 32em;
+  margin-top: 0.55rem;
+  color: var(--tinta-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.hA__foto {
+  grid-area: foto;
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  width: var(--foto);
+  margin: 0;
+}
+
+.hA__foto img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.hA__sticker {
+  position: absolute;
+  left: max(-4.75rem, calc((var(--cw) - var(--foto)) * -1 + 0.25rem));
+  bottom: 12%;
+}
+
+.hA__accion {
+  grid-area: accion;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.85rem;
+  padding-block: 1rem 1.75rem;
+  --foco: var(--tinta); /* el turquesa no contrasta lo suficiente sobre lima */
+}
+
+.hA__dato {
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.hA__ctas {
+  display: grid;
+  gap: 0.25rem;
+  justify-items: start;
+}
+
+.hA__ctas .btn {
+  width: 100%;
+}
+
+/* En pantallas muy angostas el botón dice «Pedir DetoxPlus»; el nombre accesible sigue completo. */
+@media (max-width: 359px) {
+  .hA__solo-amplio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+.hA__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: max-content;
+  max-width: 100%;
+  padding: 0.35rem 1.1rem 0.35rem 0.35rem;
+  border-radius: 999px;
+  background: var(--blanco);
+  text-decoration: none;
+}
+
+.hA__chip img {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hA__chip > span {
+  display: grid;
+  line-height: 1.2;
+}
+
+.hA__chip-k {
+  color: var(--tinta-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.hA__chip-n {
+  font-weight: 750;
+}
+
+.hA__chip-n b {
+  margin-left: 0.35rem;
+  font-weight: 750;
+  color: #7a4a00;
+}
+
+.hA__chip:hover .hA__chip-n {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+@media (min-width: 640px) {
+  .hA__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .hA__ctas > * {
+    white-space: nowrap;
+  }
+
+  .hA__ctas .btn {
+    width: auto;
+  }
+}
+
+/* ── Escritorio: texto a la izquierda, foto vertical a la derecha.
+      La línea del líquido separa el mensaje (marfil) de la acción (lima). ── */
+@media (min-width: 960px) {
+  .hA {
+    --H: min(calc(100svh - var(--hdr) - 4.5rem), 40rem, 51vw); /* alto de la foto */
+    --nivel: 0.44;
+    padding-top: 2.25rem;
+  }
+
+  .hA__grid {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: calc(var(--H) * var(--nivel)) calc(var(--H) * (1 - var(--nivel)));
+    grid-template-areas:
+      'msg foto'
+      'accion foto';
+    column-gap: clamp(3rem, 6vw, 6.5rem);
+  }
+
+  .hA__grid::before {
+    grid-row: 2 / 3;
+  }
+
+  .hA__msg {
+    align-self: end;
+    padding-bottom: 2rem;
+  }
+
+  .hA__foto {
+    justify-self: end;
+    width: calc(var(--H) * 0.75);
+  }
+
+  .hA__foto img {
+    aspect-ratio: 3 / 4;
+    border-radius: 2rem;
+  }
+
+  .hA__sticker {
+    left: -3.25rem;
+    bottom: 16%;
+  }
+
+  .hA__sticker .sticker__name {
+    font-size: 1.5rem;
+  }
+
+  .hA__accion {
+    align-content: start;
+    gap: 1.1rem;
+    padding-block: 2.25rem 2rem;
+  }
+
+  .hA__dato {
+    font-size: 1.0625rem;
+  }
+}
+
+/* Entrada única: el campo sube como el líquido; la etiqueta aparece al final. */
+@media (prefers-reduced-motion: no-preference) {
+  .hA__grid::before {
+    animation: hA-sube 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  }
+
+  .hA__sticker {
+    animation: hA-etiqueta 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0.75s both;
+  }
+}
+
+@keyframes hA-sube {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hA-etiqueta {
+  from {
+    opacity: 0;
+    transform: rotate(-12deg) scale(0.7);
+  }
+}

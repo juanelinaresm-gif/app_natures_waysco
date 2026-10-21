@@ -1,0 +1,63 @@
+# Servidor de producción para Railway (basado en https://docs.railway.com/guides/react).
+# Sirve solo el build de Vite (copiado a /srv). Railway termina HTTPS delante de Caddy.
+{
+	admin off
+	persist_config off
+	auto_https off
+	log {
+		format json
+	}
+	servers {
+		trusted_proxies static 0.0.0.0/0 ::/0
+	}
+}
+
+# Puerto asignado por Railway en $PORT; 3000 en local.
+:{$PORT:3000} {
+	bind 0.0.0.0
+
+	log {
+		format json
+	}
+
+	root * /srv
+
+	# Comprime solo tipos comprimibles (HTML, CSS, JS, SVG, JSON…); videos e imágenes no.
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	# Archivos con hash de Vite: caché larga. Medios: caché de un día.
+	header /assets/* Cache-Control "public, max-age=31536000, immutable"
+	header /media/* Cache-Control "public, max-age=86400"
+
+	# Chequeo de salud para Railway.
+	handle /health {
+		header Cache-Control no-store
+		respond "OK" 200
+	}
+
+	# Medios, assets y cualquier ruta con extensión: se sirven tal cual.
+	# Si no existen devuelven 404 (nunca el HTML de la aplicación).
+	handle /media/* {
+		file_server
+	}
+	handle /assets/* {
+		file_server
+	}
+	@archivo path_regexp \.[A-Za-z0-9]+$
+	handle @archivo {
+		file_server
+	}
+
+	# Navegación de la SPA: rutas sin extensión caen en index.html.
+	handle {
+		header Cache-Control no-cache
+		try_files {path} /index.html
+		file_server
+	}
+}

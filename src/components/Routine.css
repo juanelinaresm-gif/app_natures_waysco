@@ -1,0 +1,133 @@
+.rutina {
+  background: #e3efcc;
+}
+
+.rutina__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 96px 32px;
+}
+
+.rutina__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px 48px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.rutina__title {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 84px);
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.rutina__title > span {
+  display: block;
+}
+
+.rutina__intro {
+  margin: 0;
+  max-width: 440px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #33433a;
+  text-wrap: pretty;
+}
+
+.rutina__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 32px;
+}
+
+/* Línea del día: se dibuja de izquierda a derecha al aparecer. */
+.rutina__line {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  top: 27px;
+  height: 3px;
+  background: #1c2b22;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rutina__step {
+  position: relative;
+}
+
+.rutina__num {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #1c2b22;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.rutina__step-title {
+  margin: 22px 0 8px;
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.rutina__step-text {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #33433a;
+  text-wrap: pretty;
+}
+
+.rutina__label {
+  margin-top: 56px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+}
+
+.rutina__tag {
+  background: #1c2b22;
+  color: #9bcb3f;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  flex: none;
+}
+
+.rutina__label-text {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.45;
+  flex: 1;
+  min-width: 280px;
+}
+
+.rutina__label-text strong {
+  font-weight: 800;
+}
+
+.rutina__note {
+  margin: 12px 28px 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #4a5b50;
+}

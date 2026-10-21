@@ -1,0 +1,347 @@
+/* Base común de las dos alternativas de portada (prototipo de diseño, no producción). */
+
+@font-face {
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(assets/fonts/urbanist-latin-wght-normal.woff2) format('woff2-variations');
+}
+
+:root {
+  /* Superficies y texto */
+  --leche: #fbf9f4;
+  --blanco: #ffffff;
+  --tinta: #17251c;
+  --tinta-2: #4a574e;
+  --linea: #e4ded1;
+
+  /* Logo */
+  --turquesa: #04a0ce; /* solo decorativo: 3,0:1 sobre blanco */
+  --turquesa-hondo: #00708f; /* acciones de WhatsApp, enlaces y foco */
+  --sol: #fabe04;
+
+  /* DetoxPlus */
+  --lima: #a8cf45;
+  --lima-campo: #e6f1cf;
+  --hoja: #2f6e21;
+
+  /* ColagenPlus */
+  --ambar: #f5a524;
+  --ambar-campo: #ffefcb;
+
+  --font: 'Urbanist', ui-sans-serif, system-ui, sans-serif;
+  --g: clamp(1rem, 4vw, 3rem); /* margen lateral */
+  --max: 75rem;
+  --hdr: 3.75rem; /* alto del encabezado: 60 px en móvil */
+  --foco: var(--turquesa-hondo);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* El encabezado fijo no tapa el destino de los enlaces internos ni el foco. */
+  scroll-padding-top: calc(var(--hdr) + 0.75rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--leche);
+  color: var(--tinta);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--g));
+  margin-inline: auto;
+  padding-inline: var(--g);
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 50;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--tinta);
+  color: var(--blanco);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip:focus {
+  top: 0.6rem;
+}
+
+/* ── Encabezado: fijo, compacto y siempre igual. Sustituye al botón flotante. ── */
+
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--blanco);
+  box-shadow: 0 1px 0 var(--linea);
+}
+
+.hdr__in {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-template-areas:
+    'logo . menu wa'
+    'nav nav nav nav';
+  align-items: center;
+  column-gap: 0.5rem;
+  min-height: var(--hdr);
+}
+
+.hdr__logo {
+  grid-area: logo;
+  display: block;
+  border-radius: 0.25rem;
+}
+
+.hdr__logo img {
+  width: 98px; /* 40 px de alto: el nombre sigue legible */
+}
+
+.hdr__menu {
+  grid-area: menu;
+  min-height: 2.75rem;
+  padding: 0 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--tinta);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hdr__menu:hover {
+  background: var(--leche);
+}
+
+.hdr__nav {
+  grid-area: nav;
+  display: none;
+  padding-bottom: 0.5rem;
+}
+
+.hdr__nav.is-open {
+  display: grid;
+}
+
+.hdr__nav a {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--linea);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.hdr__wa {
+  grid-area: wa;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --hdr: 4.5rem;
+  }
+
+  .hdr__in {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'logo nav wa';
+    column-gap: 2rem;
+  }
+
+  .hdr__logo img {
+    width: 118px;
+  }
+
+  .hdr__menu {
+    display: none;
+  }
+
+  .hdr__nav,
+  .hdr__nav.is-open {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.75rem;
+    padding: 0;
+  }
+
+  .hdr__nav a {
+    padding: 0.6rem 0;
+    border: 0;
+    font-size: 0.9375rem;
+  }
+
+  .hdr__nav a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+}
+
+/* ── Botones ── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.8rem 1.35rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 750;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn svg {
+  flex: none;
+}
+
+.btn--sm {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.9375rem;
+}
+
+/* Pedir: acción principal, sale a WhatsApp. */
+.btn--pedir {
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.btn--pedir svg {
+  color: var(--lima);
+}
+
+.btn--pedir:hover {
+  background: #22382a;
+}
+
+/* Consultar por WhatsApp: acción general de contacto. */
+.btn--wa {
+  background: var(--turquesa-hondo);
+  color: var(--blanco);
+}
+
+.btn--wa:hover {
+  background: #005b75;
+}
+
+.btn--wa-linea {
+  border-color: var(--turquesa-hondo);
+  background: var(--blanco);
+  color: var(--turquesa-hondo);
+}
+
+.btn--wa-linea:hover {
+  background: #eef8fb;
+}
+
+/* Explorar: navegación dentro de la página. */
+.btn--explorar {
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.link-explorar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  font-weight: 750;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+/* ── Etiqueta de precio: evoca una etiqueta adhesiva, en el amarillo del logo. ── */
+
+.sticker {
+  display: grid;
+  gap: 0.05rem;
+  width: max-content;
+  padding: 0.6rem 0.9rem 0.7rem;
+  border-radius: 0.9rem;
+  background: var(--sol);
+  color: var(--tinta);
+  line-height: 1.1;
+  transform: rotate(-4deg);
+  box-shadow: 0 6px 16px rgb(23 37 28 / 0.18);
+}
+
+.sticker__tag {
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.sticker__name {
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.sticker__price {
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+/* Marcador del resto de la página: solo para probar anclas y el encabezado fijo. */
+.placeholder {
+  padding-block: 3rem 40rem;
+  border-top: 1px dashed var(--linea);
+  color: var(--tinta-2);
+}
+
+.placeholder h2 {
+  font-size: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portada B · El dúo · Nature’s Wayco (prototipo)</title>
+    <link rel="preload" href="assets/fonts/urbanist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="comun.css" />
+    <link rel="stylesheet" href="alternativa-b.css" />
+  </head>
+  <body>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+
+    <header class="hdr">
+      <div class="wrap hdr__in">
+        <a class="hdr__logo" href="#inicio">
+          <img
+            src="assets/img/logo-300.webp"
+            srcset="assets/img/logo-300.webp 1x, assets/img/logo-600.webp 2x"
+            width="98"
+            height="40"
+            alt="Nature’s Wayco, ir al inicio"
+          />
+        </a>
+        <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+        <nav class="hdr__nav" id="menu" aria-label="Secciones">
+          <a href="#productos">Productos</a>
+          <a href="#preparacion">Preparación</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#preguntas">Preguntas</a>
+        </nav>
+        <a
+          class="btn btn--wa btn--sm hdr__wa"
+          href="https://wa.me/573124475525?text=Hola%2C%20Nature%E2%80%99s%20Wayco.%20Quiero%20conocer%20m%C3%A1s%20sobre%20sus%20productos."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa" /></svg>
+          WhatsApp
+        </a>
+      </div>
+    </header>
+
+    <main id="contenido" tabindex="-1">
+      <section class="hB" id="inicio" aria-labelledby="hB-titulo">
+        <div class="wrap hB__top">
+          <h1 id="hB-titulo" class="hB__titulo">Bienestar que se integra a tu día</h1>
+          <div class="hB__lado">
+            <p class="hB__lead">
+              Descubre DetoxPlus y ColagenPlus: dos formas de sumar un nuevo hábito a tu rutina.
+            </p>
+            <div class="hB__ctas">
+              <a class="btn btn--explorar" href="#productos">
+                Ver productos
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-abajo" /></svg>
+              </a>
+              <a
+                class="btn btn--wa-linea"
+                href="https://wa.me/573124475525?text=Hola%2C%20Nature%E2%80%99s%20Wayco.%20Quiero%20conocer%20m%C3%A1s%20sobre%20sus%20productos."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa" /></svg>
+                <span>Consultar<span class="hB__solo-amplio"> por WhatsApp</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <ul class="duo" aria-label="Productos">
+          <li class="duo__campo duo__campo--detox">
+            <a class="duo__item" href="#detoxplus">
+              <img src="assets/img/detoxplus-vaso-3x4.webp" width="576" height="768" alt="" fetchpriority="high" />
+              <span class="duo__texto">
+                <span class="duo__tag">El más vendido</span>
+                <span class="duo__nombre">DetoxPlus</span>
+                <span class="duo__sabor">Lulo, kiwi y manzana</span>
+                <span class="duo__precio">$70.000 <small>COP</small></span>
+                <span class="duo__ver">Ver producto</span>
+              </span>
+            </a>
+          </li>
+          <li class="duo__campo duo__campo--colagen">
+            <a class="duo__item" href="#colagenplus">
+              <img src="assets/img/colagenplus-vaso-3x4.webp" width="600" height="800" alt="" />
+              <span class="duo__texto">
+                <span class="duo__nombre">ColagenPlus</span>
+                <span class="duo__sabor">Citrus Punch</span>
+                <span class="duo__precio">$130.000 <small>COP</small></span>
+                <span class="duo__ver">Ver producto</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="placeholder wrap" id="productos">
+        <h2>Catálogo (se diseña en la siguiente etapa)</h2>
+        <p id="detoxplus">Marcadores de destino: DetoxPlus, <span id="colagenplus">ColagenPlus</span>.</p>
+        <p id="preparacion">Preparación</p>
+        <p id="nosotros">Nosotros</p>
+        <p id="preguntas">Preguntas</p>
+      </section>
+    </main>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-wa" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.67.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z" />
+      </symbol>
+      <symbol id="i-abajo" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6" />
+      </symbol>
+    </svg>
+
+    <script>
+      const btn = document.querySelector('.hdr__menu')
+      const nav = document.getElementById('menu')
+      const set = (open) => {
+        btn.setAttribute('aria-expanded', String(open))
+        btn.textContent = open ? 'Cerrar' : 'Menú'
+        nav.classList.toggle('is-open', open)
+      }
+      btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'))
+      nav.addEventListener('click', (e) => e.target.closest('a') && set(false))
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+          set(false)
+          btn.focus()
+        }
+      })
+    </script>
+  </body>
+</html>

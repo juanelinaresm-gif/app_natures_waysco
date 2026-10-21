@@ -1,0 +1,81 @@
+.hablamos {
+  background: #dceef3;
+  border-bottom: 14px solid #f2a422;
+  overflow: hidden;
+}
+
+.hablamos__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 120px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 56px;
+  align-items: center;
+}
+
+.hablamos__title-box {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.hablamos__title {
+  margin: 0;
+  font-weight: 800;
+  font-size: min(19cqw, 168px);
+  letter-spacing: -0.065em;
+  line-height: 0.88;
+  overflow: hidden;
+  padding: 0 0.04em 0.1em 0;
+  white-space: nowrap;
+}
+
+.hablamos__title > span {
+  display: block;
+}
+
+.hablamos__text {
+  margin: 0 0 32px;
+  font-size: 21px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.hablamos__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hablamos__wa {
+  background: #0e5e75;
+  color: #fff;
+  padding: 18px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 17px;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+
+.hablamos__wa:hover {
+  transform: translateY(-3px) rotate(-2deg);
+  background: #1c2b22;
+  color: #fff;
+}
+
+.hablamos__ig {
+  border: 2px solid #1c2b22;
+  padding: 16px 26px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 17px;
+  transition: all 0.25s;
+}
+
+.hablamos__ig:hover {
+  background: #1c2b22;
+  color: #dceef3;
+  transform: translateY(-3px) rotate(2deg);
+}

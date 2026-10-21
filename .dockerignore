@@ -1,0 +1,33 @@
+# Lista de permitidos: se excluye todo y solo entra lo necesario para compilar.
+# Quedan fuera node_modules, dist, .git, docs (reportes y capturas), visual-pieces y su ZIP
+# (originales y exportaciones de diseño), scripts de mantenimiento, archivos .env y secretos.
+*
+
+!package.json
+!package-lock.json
+!index.html
+!vite.config.ts
+!tsconfig.json
+!tsconfig.app.json
+!tsconfig.node.json
+!tsconfig.test.json
+!src/
+!tests/
+!Caddyfile
+
+# public/: solo los archivos que usa la página actual (ver src/data/media.ts e index.html).
+!public/favicon-32.png
+!public/apple-touch-icon.png
+!public/robots.txt
+!public/media/logo-diseno-*
+!public/media/detox-jar-*
+!public/media/colagen-jar-*
+!public/media/esencia-bosque-*
+!public/media/portada-video-poster-1024.webp
+!public/media/video/home-background.mp4
+
+# Nunca, aunque estén dentro de una carpeta permitida.
+**/.DS_Store
+**/.env*
+**/*.pem
+**/*.key

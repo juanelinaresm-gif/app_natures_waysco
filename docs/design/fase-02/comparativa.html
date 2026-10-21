@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Comparativa de portadas · Nature’s Wayco</title>
+    <link rel="stylesheet" href="portadas/comun.css" />
+    <style>
+      body {
+        width: 2400px;
+        padding: 48px;
+        background: #ecebe6;
+      }
+      h1 {
+        font-size: 40px;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        margin-top: 6px;
+        color: var(--tinta-2);
+        font-size: 20px;
+      }
+      .fila {
+        display: grid;
+        grid-template-columns: 390px 1fr;
+        gap: 40px;
+        align-items: start;
+        margin-top: 44px;
+      }
+      .fila h2 {
+        grid-column: 1 / -1;
+        font-size: 30px;
+      }
+      .fila h2 span {
+        color: var(--tinta-2);
+        font-weight: 600;
+      }
+      figure {
+        margin: 0;
+      }
+      figure img {
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 0.12);
+      }
+      figcaption {
+        margin-top: 10px;
+        color: var(--tinta-2);
+        font-size: 17px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Portada: dos alternativas</h1>
+    <p class="sub">Móvil 390 × 844 y escritorio 1440 × 900. Prototipos con material real; sin animación en las capturas.</p>
+
+    <section class="fila">
+      <h2>A · El nivel <span>(recomendada) — DetoxPlus servido, pedido directo por WhatsApp</span></h2>
+      <figure>
+        <img src="capturas/a-movil-390x844.png" width="390" height="844" alt="Alternativa A en móvil" />
+        <figcaption>Móvil 390 × 844</figcaption>
+      </figure>
+      <figure>
+        <img src="capturas/a-escritorio-1440x900.png" width="1440" height="900" alt="Alternativa A en escritorio" />
+        <figcaption>Escritorio 1440 × 900</figcaption>
+      </figure>
+    </section>
+
+    <section class="fila">
+      <h2>B · El dúo <span>— los dos productos en portada, exploración primero</span></h2>
+      <figure>
+        <img src="capturas/b-movil-390x844.png" width="390" height="844" alt="Alternativa B en móvil" />
+        <figcaption>Móvil 390 × 844</figcaption>
+      </figure>
+      <figure>
+        <img src="capturas/b-escritorio-1440x900.png" width="1440" height="900" alt="Alternativa B en escritorio" />
+        <figcaption>Escritorio 1440 × 900</figcaption>
+      </figure>
+    </section>
+  </body>
+</html>

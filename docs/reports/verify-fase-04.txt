@@ -1,0 +1,89 @@
+OK   [movil-320] sin desbordamiento horizontal — scrollWidth=320, ancho=320
+OK   [movil-320] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-320] todas las entradas terminan visibles
+OK   [movil-320] los precios terminan su animación
+OK   [movil-320] la línea de la rutina se dibuja — scaleX(1)
+OK   [movil-320] sin errores en consola
+OK   [movil-320] sin solicitudes externas
+OK   [movil-375] sin desbordamiento horizontal — scrollWidth=375, ancho=375
+OK   [movil-375] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-820.avif, colagen-jar-1010.avif, esencia-bosque-714.avif, logo-diseno-420.webp
+OK   [movil-375] todas las entradas terminan visibles
+OK   [movil-375] los precios terminan su animación
+OK   [movil-375] la línea de la rutina se dibuja — scaleX(1)
+OK   [movil-375] sin errores en consola
+OK   [movil-375] sin solicitudes externas
+OK   [tableta-768] sin desbordamiento horizontal — scrollWidth=768, ancho=768
+OK   [tableta-768] imágenes con alt, dimensiones y carga correcta (5)
+OK   [tableta-768] todas las entradas terminan visibles
+OK   [tableta-768] los precios terminan su animación
+OK   [tableta-768] la línea de la rutina se dibuja — scaleX(1)
+OK   [tableta-768] sin errores en consola
+OK   [tableta-768] sin solicitudes externas
+OK   [escritorio-1440] sin desbordamiento horizontal — scrollWidth=1440, ancho=1440
+OK   [escritorio-1440] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-480.avif, colagen-jar-500.avif, esencia-bosque-480.avif, logo-diseno-420.webp
+OK   [escritorio-1440] todas las entradas terminan visibles
+OK   [escritorio-1440] los precios terminan su animación
+OK   [escritorio-1440] la línea de la rutina se dibuja — scaleX(1)
+OK   [escritorio-1440] sin errores en consola
+OK   [escritorio-1440] sin solicitudes externas
+OK   [escritorio-2560] sin desbordamiento horizontal — scrollWidth=2560, ancho=2560
+OK   [escritorio-2560] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-2560] todas las entradas terminan visibles
+OK   [escritorio-2560] los precios terminan su animación
+OK   [escritorio-2560] la línea de la rutina se dibuja — scaleX(1)
+OK   [escritorio-2560] sin errores en consola
+OK   [escritorio-2560] sin solicitudes externas
+OK   anclas internas válidas (12)
+OK   WhatsApp «WhatsApp» — sin mensaje precargado
+OK   WhatsApp «Pedir por WhatsApp →: DetoxPlus» en #detox — mensaje: "Hola, quiero pedir DetoxPlus ($70.000 COP)"
+OK   WhatsApp «Pedir por WhatsApp →: ColagenPlus» en #colagen — mensaje: "Hola, quiero pedir ColagenPlus ($130.000 COP)"
+OK   WhatsApp «Escríbenos por WhatsApp» — sin mensaje precargado
+OK   WhatsApp «WhatsApp +57 312 447 5525» — sin mensaje precargado
+OK   enlaces de Instagram — https://instagram.com/natures_wayco, https://instagram.com/natures_wayco
+OK   DetoxPlus: nombre, precio y envase corresponden — DetoxPlus | $70.000 | /media/detox-jar-820.png
+OK   ColagenPlus: nombre, precio y envase corresponden — ColagenPlus | $130.000 | /media/colagen-jar-1010.png
+OK   DetoxPlus aparece antes que ColagenPlus — detox, colagen
+OK   un solo h1
+     títulos: H1:Bienestar que seintegra a tu día / H2:Nuestrosproductos / H3:DetoxPlus / H3:ColagenPlus / H2:Tu rutina / H3:Tenlo a la vista / H3:Súmalo a algo que ya haces / H3:Elige el que va contigo / H2:Nuestraesencia / H2:Preguntasfrecuentes / H2:¿Hablamos?
+OK   [movil-375] primer Tab: enlace para saltar al contenido
+OK   [movil-375] foco visible en 26 paradas de Tab
+OK   [movil-375] el elemento enfocado queda en pantalla
+OK   [movil-375] el video no recibe foco
+     orden de foco: Saltar al contenido → Nature’s Wayco, ir al inicio → Productos → Rutina → Esencia → Preguntas → WhatsApp → Conoce DetoxPlus → Ver productos → Pausar video → Pedir por WhatsApp →: DetoxPlus → Pedir por WhatsApp →: ColagenPlus …
+OK   [movil-375] Enter en «Preguntas» lleva a la sección — top=80
+OK   [movil-375] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":164}
+OK   [escritorio-1440] primer Tab: enlace para saltar al contenido
+OK   [escritorio-1440] foco visible en 26 paradas de Tab
+OK   [escritorio-1440] el elemento enfocado queda en pantalla
+OK   [escritorio-1440] el video no recibe foco
+OK   [escritorio-1440] Enter en «Preguntas» lleva a la sección — top=80
+OK   [escritorio-1440] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":82}
+OK   portada: video automático, en bucle, silenciado y en línea — avanzó 1.2 s en 1,2 s, 1024×576
+OK   portada: sin sonido (0 bytes de audio decodificados) — 0
+OK   portada: encuadre del diseño (cover y escala 1,08) y video decorativo — {"fit":"cover","transform":"matrix(1.08, 0, 0, 1.08, 0, 0)","poster":"portada-video-poster-1024.webp"}
+OK   portada: se pausa fuera de pantalla y reanuda al volver — {"away":true,"back":false}
+OK   portada: control de pausa (▶ / ❚❚), pausa manual respetada al volver — {"manual":{"paused":true,"label":"Reproducir video","icon":"▶"},"manualBack":true,"resumed":{"paused":false,"label":"Pausar video","icon":"❚❚"}}
+OK   portada: se pausa con la pestaña oculta y reanuda al volver — {"hiddenPaused":true,"visiblePlaying":true}
+OK   portada: «Conoce DetoxPlus» lleva a #detox — #detox
+OK   portada: «Ver productos» lleva a #productos — #productos
+OK   portada: sin errores en consola
+OK   portada: si el video falla quedan el fondo y el texto, sin errores — {"label":"Reproducir video","title":"1","errores":0}
+OK   movimiento reducido: sin entradas, cinta ni paralaje; línea completa; video en pausa con su póster — {"paused":true,"autoplay":false,"label":"Reproducir video","entradasOcultas":0,"cinta":"none","linea":"scaleX(1)","motion":"off"}
+OK   movimiento reducido: el video se reproduce solo al pedirlo — {"paused":false,"label":"Pausar video"}
+FALLA [movil-375] contraste del texto oscuro de portada al inicio del clip — titular 5.39:1 (mín. 3), texto 1.29:1 (mín. 4,5)
+FALLA [movil-375] contraste del texto oscuro de portada a la mitad del clip — titular 6.89:1 (mín. 3), texto 1.15:1 (mín. 4,5)
+OK   [movil-375] contraste del texto oscuro de portada al final del clip — titular 6.01:1 (mín. 3), texto 6.97:1 (mín. 4,5)
+FALLA [tableta-768] contraste del texto oscuro de portada al inicio del clip — titular 6.23:1 (mín. 3), texto 1.65:1 (mín. 4,5)
+FALLA [tableta-768] contraste del texto oscuro de portada a la mitad del clip — titular 5.79:1 (mín. 3), texto 1.24:1 (mín. 4,5)
+OK   [tableta-768] contraste del texto oscuro de portada al final del clip — titular 3.66:1 (mín. 3), texto 7.79:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada al inicio del clip — titular 8.28:1 (mín. 3), texto 7:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada a la mitad del clip — titular 8.02:1 (mín. 3), texto 5.11:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada al final del clip — titular 6.11:1 (mín. 3), texto 8.84:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada al inicio del clip — titular 9.29:1 (mín. 3), texto 6.79:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada a la mitad del clip — titular 9.39:1 (mín. 3), texto 4.97:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada al final del clip — titular 6.02:1 (mín. 3), texto 8.94:1 (mín. 4,5)
+
+78/82 verificaciones correctas
+exit=1

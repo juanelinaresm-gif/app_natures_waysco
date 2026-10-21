@@ -1,0 +1,138 @@
+OK   [movil-320] video de Rutina no se descarga al cargar
+OK   [movil-320] sin desbordamiento horizontal — scrollWidth=320, ancho=320
+OK   [movil-320] imágenes con alt, dimensiones y carga correcta (6)
+OK   [movil-320] detoxplus: recorte transparente, contenido, sin marco ni recorte — detoxplus-recorte-640.avif, alfa esquina=0 centro=254, 196×256 px
+OK   [movil-320] colagenplus: recorte transparente, contenido, sin marco ni recorte — colagenplus-recorte-740.avif, alfa esquina=0 centro=253, 231×269 px
+OK   [movil-320] tarros equilibrados (alto ColagenPlus / DetoxPlus) — 1.05
+OK   [movil-320] botón flotante oculto con el encabezado visible
+OK   [movil-320] sin errores en consola
+OK   [movil-320] sin solicitudes externas
+OK   [movil-375] video de Rutina no se descarga al cargar
+OK   [movil-375] sin desbordamiento horizontal — scrollWidth=375, ancho=375
+OK   [movil-375] imágenes con alt, dimensiones y carga correcta (6)
+     formatos servidos: webp, avif
+OK   [movil-375] detoxplus: recorte transparente, contenido, sin marco ni recorte — detoxplus-recorte-640.avif, alfa esquina=0 centro=254, 223×293 px
+OK   [movil-375] colagenplus: recorte transparente, contenido, sin marco ni recorte — colagenplus-recorte-740.avif, alfa esquina=0 centro=253, 264×307 px
+OK   [movil-375] tarros equilibrados (alto ColagenPlus / DetoxPlus) — 1.05
+OK   [movil-375] botón flotante oculto con el encabezado visible
+OK   [movil-375] sin errores en consola
+OK   [movil-375] sin solicitudes externas
+OK   [tableta-768] video de Rutina no se descarga al cargar
+OK   [tableta-768] sin desbordamiento horizontal — scrollWidth=768, ancho=768
+OK   [tableta-768] imágenes con alt, dimensiones y carga correcta (6)
+OK   [tableta-768] detoxplus: recorte transparente, contenido, sin marco ni recorte — detoxplus-recorte-640.avif, alfa esquina=0 centro=254, 269×352 px
+OK   [tableta-768] colagenplus: recorte transparente, contenido, sin marco ni recorte — colagenplus-recorte-740.avif, alfa esquina=0 centro=253, 318×370 px
+OK   [tableta-768] tarros equilibrados (alto ColagenPlus / DetoxPlus) — 1.05
+OK   [tableta-768] botón flotante oculto con el encabezado visible
+OK   [tableta-768] sin errores en consola
+OK   [tableta-768] sin solicitudes externas
+OK   [escritorio-1440] video de Rutina no se descarga al cargar
+OK   [escritorio-1440] sin desbordamiento horizontal — scrollWidth=1440, ancho=1440
+OK   [escritorio-1440] imágenes con alt, dimensiones y carga correcta (6)
+     formatos servidos: webp, avif
+OK   [escritorio-1440] detoxplus: recorte transparente, contenido, sin marco ni recorte — detoxplus-recorte-440.avif, alfa esquina=0 centro=253, 318×416 px
+OK   [escritorio-1440] colagenplus: recorte transparente, contenido, sin marco ni recorte — colagenplus-recorte-500.avif, alfa esquina=0 centro=253, 376×437 px
+OK   [escritorio-1440] tarros equilibrados (alto ColagenPlus / DetoxPlus) — 1.05
+OK   [escritorio-1440] botón flotante no se muestra en escritorio
+OK   [escritorio-1440] sin errores en consola
+OK   [escritorio-1440] sin solicitudes externas
+OK   [escritorio-2560] video de Rutina no se descarga al cargar
+OK   [escritorio-2560] sin desbordamiento horizontal — scrollWidth=2560, ancho=2560
+OK   [escritorio-2560] imágenes con alt, dimensiones y carga correcta (6)
+OK   [escritorio-2560] detoxplus: recorte transparente, contenido, sin marco ni recorte — detoxplus-recorte-440.avif, alfa esquina=0 centro=253, 318×416 px
+OK   [escritorio-2560] colagenplus: recorte transparente, contenido, sin marco ni recorte — colagenplus-recorte-500.avif, alfa esquina=0 centro=253, 376×437 px
+OK   [escritorio-2560] tarros equilibrados (alto ColagenPlus / DetoxPlus) — 1.05
+OK   [escritorio-2560] botón flotante no se muestra en escritorio
+OK   [escritorio-2560] sin errores en consola
+OK   [escritorio-2560] sin solicitudes externas
+OK   anclas internas válidas (12)
+OK   WhatsApp «WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «Pedir por WhatsApp: DetoxPlus» en detoxplus — mensaje: "Hola, Nature’s Wayco. Quiero pedir DetoxPlus ($70.000 COP). ¿Me confirman disponibilidad y envío?"
+OK   WhatsApp «Pedir por WhatsApp: ColagenPlus» en colagenplus — mensaje: "Hola, Nature’s Wayco. Quiero pedir ColagenPlus ($130.000 COP). ¿Me confirman disponibilidad y envío?"
+OK   WhatsApp «Escríbenos por WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «WhatsApp +57 312 447 5525» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «Escríbenos por WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+     ejemplo de URL: https://wa.me/573124475525?text=Hola%2C%20Nature%E2%80%99s%20Wayco.%20Quiero%20pedir%20DetoxPlus%20(%2470.000%20COP).%20%C2%BFMe%20confirman%20disponibilidad%20y%20env%C3%ADo%3F
+OK   DetoxPlus: nombre, precio e imagen corresponden — DetoxPlus | $70.000 | /media/detoxplus-recorte-860.png
+OK   ColagenPlus: nombre, precio e imagen corresponden — ColagenPlus | $130.000 | /media/colagenplus-recorte-980.png
+OK   DetoxPlus aparece antes que ColagenPlus — detoxplus, colagenplus
+OK   un solo h1
+     títulos: H1:Bienestar que se integra a tu día / H2:Nuestros productos / H3:DetoxPlus / H3:ColagenPlus / H2:Tu rutina / H3:Tenlo a la vista / H3:Súmalo a algo que ya haces / H3:Elige el que va contigo / H3:Lo que indica la etiqueta / H2:Nuestra esencia / H2:Preguntas frecuentes / H2:¿Hablamos?
+OK   [movil-375] primer Tab: enlace para saltar al contenido
+OK   [movil-375] foco visible en 29 paradas de Tab
+OK   [movil-375] el elemento enfocado queda en pantalla
+OK   [movil-375] botón flotante oculto no recibe foco
+     orden de foco: Saltar al contenido → Nature’s Wayco, ir al inicio → Productos → Rutina → Esencia → Preguntas → WhatsApp → Conoce DetoxPlus → Ver productos → Pausar video de fondo → Pedir por WhatsApp: DetoxPlus → Pedir por WhatsApp: ColagenPlus → Video de 10 segundos: una bebida verde s → Video de 10 segundos: una bebida verde s …
+OK   [movil-375] Enter en «Preguntas» lleva a la sección — top=32
+OK   [movil-375] pregunta frecuente se abre con teclado
+OK   [escritorio-1440] primer Tab: enlace para saltar al contenido
+OK   [escritorio-1440] foco visible en 29 paradas de Tab
+OK   [escritorio-1440] el elemento enfocado queda en pantalla
+OK   [escritorio-1440] botón flotante oculto no recibe foco
+OK   [escritorio-1440] Enter en «Preguntas» lleva a la sección — top=32
+OK   [escritorio-1440] pregunta frecuente se abre con teclado
+OK   video sin descargar antes de reproducir
+OK   video se reproduce al pedirlo — avanzó 1.46 s de 10.13 s, 576×1024
+     botón flotante en «portada»: oculto
+     botón flotante en «descripción de DetoxPlus»: visible
+     botón flotante en «botón de pedido»: oculto
+     botón flotante en «video»: oculto
+     botón flotante en «ideas de rutina»: oculto
+     botón flotante en «esencia»: visible
+     botón flotante en «cierre»: oculto
+     botón flotante en «pie de página»: oculto
+OK   botón flotante oculto sobre botones de pedido, video, cierre y pie
+OK   botón flotante visible en zonas de lectura
+OK   botón flotante visible no tapa enlaces ni controles en los puntos revisados
+OK   movimiento reducido: póster estático, video sin descargar y desplazamiento sin animación — {"scroll":"auto","paused":true,"autoplay":false,"preload":"none","posterVisible":true,"label":"Reproducir video de fondo","solicitudes":0}
+OK   movimiento reducido: el video se reproduce solo al pedirlo con el botón — {"paused":false,"t":1.185853,"label":"Pausar video de fondo"}
+OK   portada: video automático, en bucle, silenciado y en línea — avanzó 1.2 s en 1,2 s, 1024×576
+OK   portada: sin sonido (0 bytes de audio decodificados) — 0
+OK   portada: video decorativo (aria-hidden, sin clics ni foco, contain, sin transformaciones ni esquinas) — {"fit":"contain","transform":"none","radius":"0px"}
+OK   portada: un clic sobre el video llega a la sección, no al video — div.hero__visual
+OK   portada: el bucle reinicia y el cierre se funde sobre el póster — {"fundido":true,"reinicio":true,"sigue":true,"fundidoAlFinal":false,"t":1.43}
+OK   portada: se pausa fuera de pantalla y reanuda al volver — {"away":{"paused":true,"label":"Reproducir video de fondo"},"back":{"paused":false,"label":"Pausar video de fondo"}}
+OK   portada: al pausar se congela el cuadro actual (el video sigue visible) — opacidad 1
+OK   portada: la pausa manual se respeta al volver y el botón reanuda — {"manual":{"paused":true,"label":"Reproducir video de fondo"},"manualBack":{"paused":true,"label":"Reproducir video de fondo"},"resumed":{"paused":false,"label":"Pausar video de fondo"}}
+OK   portada: se pausa con la pestaña oculta y reanuda al volver — {"hiddenPaused":true,"visiblePlaying":true}
+OK   portada: el control es enfocable y el video no — a:0 a:0 video:-1 button:0
+OK   portada: «Conoce DetoxPlus» lleva a #detoxplus — #detoxplus
+OK   portada: «Ver productos» lleva a #productos — #productos
+OK   portada: sin errores en consola durante las pruebas del video
+OK   portada: texto y botones visibles antes de que cargue el video, con el póster de fondo — {"texto":true,"videoListo":false,"videoVisible":false,"poster":true}
+OK   portada: si el video falla queda el póster, sin control y sin errores — {"poster":true,"video":false,"control":false,"errores":0}
+OK   [movil-375] video completo: 16:9, contain, ≤ 1024 px y dentro de la ventana — 375×210.9 px (escala 0.366 del original), x 0–375 de 375
+OK   [movil-375] sin velo sobre el video: solo póster y video, con máscara en los bordes — hero__poster, hero__video is-visible
+OK   [movil-375] encuadre igual al original al inicio del clip — RMSE 0.0142; controles: ampliado 10 % 0.0719, desplazado 2 % 0.0551
+OK   [movil-375] encuadre igual al original a la mitad del clip — RMSE 0.0106; controles: ampliado 10 % 0.0901, desplazado 2 % 0.0628
+OK   [movil-375] encuadre igual al original al final del clip — RMSE 0.0126; controles: ampliado 10 % 0.1448, desplazado 2 % 0.1079
+OK   [tableta-768] video completo: 16:9, contain, ≤ 1024 px y dentro de la ventana — 768×432 px (escala 0.75 del original), x 0–768 de 768
+OK   [tableta-768] sin velo sobre el video: solo póster y video, con máscara en los bordes — hero__poster, hero__video is-visible
+OK   [tableta-768] encuadre igual al original al inicio del clip — RMSE 0.0072; controles: ampliado 10 % 0.0703, desplazado 2 % 0.0538
+OK   [tableta-768] encuadre igual al original a la mitad del clip — RMSE 0.0061; controles: ampliado 10 % 0.0896, desplazado 2 % 0.0624
+OK   [tableta-768] encuadre igual al original al final del clip — RMSE 0.0072; controles: ampliado 10 % 0.1438, desplazado 2 % 0.1079
+OK   [escritorio-1440] video completo: 16:9, contain, ≤ 1024 px y dentro de la ventana — 761.6×428.4 px (escala 0.744 del original), x 630–1392 de 1440
+OK   [escritorio-1440] sin velo sobre el video: solo póster y video, con máscara en los bordes — hero__poster, hero__video is-visible
+OK   [escritorio-1440] encuadre igual al original al inicio del clip — RMSE 0.0074; controles: ampliado 10 % 0.0705, desplazado 2 % 0.0542
+OK   [escritorio-1440] encuadre igual al original a la mitad del clip — RMSE 0.0059; controles: ampliado 10 % 0.0895, desplazado 2 % 0.0625
+OK   [escritorio-1440] encuadre igual al original al final del clip — RMSE 0.0072; controles: ampliado 10 % 0.1438, desplazado 2 % 0.1079
+OK   [escritorio-2560] video completo: 16:9, contain, ≤ 1024 px y dentro de la ventana — 1024×576 px (escala 1 del original), x 1216–2240 de 2560
+OK   [escritorio-2560] sin velo sobre el video: solo póster y video, con máscara en los bordes — hero__poster, hero__video is-visible
+OK   [escritorio-2560] encuadre igual al original al inicio del clip — RMSE 0.0053; controles: ampliado 10 % 0.0694, desplazado 2 % 0.0542
+OK   [escritorio-2560] encuadre igual al original a la mitad del clip — RMSE 0.0044; controles: ampliado 10 % 0.0891, desplazado 2 % 0.0621
+OK   [escritorio-2560] encuadre igual al original al final del clip — RMSE 0.0053; controles: ampliado 10 % 0.1428, desplazado 2 % 0.1083
+OK   [movil-375] contraste de portada al inicio del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [movil-375] contraste de portada a la mitad del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [movil-375] contraste de portada al final del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [tableta-768] contraste de portada al inicio del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [tableta-768] contraste de portada a la mitad del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [tableta-768] contraste de portada al final del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-1440] contraste de portada al inicio del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-1440] contraste de portada a la mitad del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-1440] contraste de portada al final del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-2560] contraste de portada al inicio del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-2560] contraste de portada a la mitad del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+OK   [escritorio-2560] contraste de portada al final del clip — titular 11.73:1 (mín. 3), texto 5.66:1 (mín. 4,5)
+
+122/122 verificaciones correctas
+exit=0

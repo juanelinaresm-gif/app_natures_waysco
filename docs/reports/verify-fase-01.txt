@@ -1,0 +1,69 @@
+OK   [movil-320] video no se descarga al cargar
+OK   [movil-320] sin desbordamiento horizontal — scrollWidth=320, ancho=320
+OK   [movil-320] imágenes con alt, dimensiones y carga correcta (6)
+OK   [movil-320] botón flotante oculto con el encabezado visible
+OK   [movil-320] sin errores en consola
+OK   [movil-320] sin solicitudes externas
+OK   [movil-375] video no se descarga al cargar
+OK   [movil-375] sin desbordamiento horizontal — scrollWidth=375, ancho=375
+OK   [movil-375] imágenes con alt, dimensiones y carga correcta (6)
+     formatos servidos: webp, avif
+OK   [movil-375] botón flotante oculto con el encabezado visible
+OK   [movil-375] sin errores en consola
+OK   [movil-375] sin solicitudes externas
+OK   [tableta-768] video no se descarga al cargar
+OK   [tableta-768] sin desbordamiento horizontal — scrollWidth=768, ancho=768
+OK   [tableta-768] imágenes con alt, dimensiones y carga correcta (6)
+OK   [tableta-768] botón flotante oculto con el encabezado visible
+OK   [tableta-768] sin errores en consola
+OK   [tableta-768] sin solicitudes externas
+OK   [escritorio-1440] video no se descarga al cargar
+OK   [escritorio-1440] sin desbordamiento horizontal — scrollWidth=1440, ancho=1440
+OK   [escritorio-1440] imágenes con alt, dimensiones y carga correcta (6)
+     formatos servidos: webp, avif
+OK   [escritorio-1440] botón flotante no se muestra en escritorio
+OK   [escritorio-1440] sin errores en consola
+OK   [escritorio-1440] sin solicitudes externas
+OK   anclas internas válidas (12)
+OK   WhatsApp «WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «Pedir por WhatsApp: DetoxPlus» en detoxplus — mensaje: "Hola, Nature’s Wayco. Quiero pedir DetoxPlus ($70.000 COP). ¿Me confirman disponibilidad y envío?"
+OK   WhatsApp «Pedir por WhatsApp: ColagenPlus» en colagenplus — mensaje: "Hola, Nature’s Wayco. Quiero pedir ColagenPlus ($130.000 COP). ¿Me confirman disponibilidad y envío?"
+OK   WhatsApp «Escríbenos por WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «WhatsApp +57 312 447 5525» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+OK   WhatsApp «Escríbenos por WhatsApp» — mensaje: "Hola, Nature’s Wayco. Quiero conocer más sobre sus productos."
+     ejemplo de URL: https://wa.me/573124475525?text=Hola%2C%20Nature%E2%80%99s%20Wayco.%20Quiero%20pedir%20DetoxPlus%20(%2470.000%20COP).%20%C2%BFMe%20confirman%20disponibilidad%20y%20env%C3%ADo%3F
+OK   DetoxPlus: nombre, precio e imagen corresponden — DetoxPlus | $70.000 | /media/detoxplus-vaso-576.jpg
+OK   ColagenPlus: nombre, precio e imagen corresponden — ColagenPlus | $130.000 | /media/colagenplus-vaso-1200.jpg
+OK   DetoxPlus aparece antes que ColagenPlus — detoxplus, colagenplus
+OK   un solo h1
+     títulos: H1:Bienestar que se integra a tu día / H2:Nuestros productos / H3:DetoxPlus / H3:ColagenPlus / H2:Tu rutina / H3:Tenlo a la vista / H3:Súmalo a algo que ya haces / H3:Elige el que va contigo / H3:Lo que indica la etiqueta / H2:Nuestra esencia / H2:Preguntas frecuentes / H2:¿Hablamos?
+OK   [movil-375] primer Tab: enlace para saltar al contenido
+OK   [movil-375] foco visible en 28 paradas de Tab
+OK   [movil-375] el elemento enfocado queda en pantalla
+OK   [movil-375] botón flotante oculto no recibe foco
+     orden de foco: Saltar al contenido → Nature’s Wayco, ir al inicio → Productos → Rutina → Esencia → Preguntas → WhatsApp → Conoce DetoxPlus → Ver productos → Pedir por WhatsApp: DetoxPlus → Pedir por WhatsApp: ColagenPlus → Video de 10 segundos: una bebida verde s → Video de 10 segundos: una bebida verde s → Video de 10 segundos: una bebida verde s …
+OK   [movil-375] Enter en «Preguntas» lleva a la sección — top=32
+OK   [movil-375] pregunta frecuente se abre con teclado
+OK   [escritorio-1440] primer Tab: enlace para saltar al contenido
+OK   [escritorio-1440] foco visible en 28 paradas de Tab
+OK   [escritorio-1440] el elemento enfocado queda en pantalla
+OK   [escritorio-1440] botón flotante oculto no recibe foco
+OK   [escritorio-1440] Enter en «Preguntas» lleva a la sección — top=32
+OK   [escritorio-1440] pregunta frecuente se abre con teclado
+OK   video sin descargar antes de reproducir
+OK   video se reproduce al pedirlo — avanzó 1.46 s de 10.13 s, 576×1024
+     botón flotante en «portada»: oculto
+     botón flotante en «descripción de DetoxPlus»: visible
+     botón flotante en «botón de pedido»: oculto
+     botón flotante en «video»: oculto
+     botón flotante en «ideas de rutina»: oculto
+     botón flotante en «esencia»: visible
+     botón flotante en «cierre»: oculto
+     botón flotante en «pie de página»: oculto
+OK   botón flotante oculto sobre botones de pedido, video, cierre y pie
+OK   botón flotante visible en zonas de lectura
+OK   botón flotante visible no tapa enlaces ni controles en los puntos revisados
+OK   prefers-reduced-motion desactiva animaciones y desplazamiento suave — {"title":"none","photo":"none","scroll":"auto"}
+
+53/53 verificaciones correctas
+exit=0

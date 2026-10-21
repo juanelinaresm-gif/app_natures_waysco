@@ -1,0 +1,3 @@
+# Sin Sitemap: requiere el dominio definitivo (pendiente).
+User-agent: *
+Allow: /

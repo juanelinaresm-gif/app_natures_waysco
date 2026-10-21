@@ -1,0 +1,270 @@
+/* Alternativa B · «El dúo»
+   El catálogo visible desde la portada: dos campos de color con la banda de cada
+   etiqueta. DetoxPlus ocupa más espacio y va primero. */
+
+.hB {
+  overflow-x: clip;
+  padding-top: 1rem;
+}
+
+.hB__top {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.hB__titulo {
+  font-size: clamp(2.05rem, 1.25rem + 3.4vw, 3.75rem);
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.hB__lead {
+  max-width: 32em;
+  color: var(--tinta-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.hB__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.hB__ctas .btn {
+  flex: 1 1 auto;
+}
+
+/* En móvil el botón dice «Consultar»; el nombre accesible sigue completo. */
+.hB__solo-amplio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── Dúo de productos ── */
+
+.duo {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: start;
+  gap: 0.6rem;
+  margin: 1.1rem 0 0;
+  padding: 0 var(--g) 1.5rem;
+  list-style: none;
+}
+
+.duo__campo {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  --foco: var(--tinta);
+}
+
+.duo__campo--detox {
+  border-bottom: 0.5rem solid var(--lima);
+  background: var(--lima-campo);
+}
+
+/* Escalonado: ColagenPlus más bajo y desplazado, para que DetoxPlus lidere. */
+.duo__campo--colagen {
+  margin-top: 1.75rem;
+  border-bottom: 0.5rem solid var(--ambar);
+  background: var(--ambar-campo);
+}
+
+.duo__item {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.duo__item:focus-visible {
+  outline-offset: -4px;
+}
+
+.duo__item img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.duo__texto {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.65rem 0.8rem 0.85rem;
+  line-height: 1.2;
+}
+
+.duo__tag {
+  justify-self: start;
+  margin-bottom: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--sol);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.duo__nombre {
+  font-size: 1.25rem;
+  font-weight: 820;
+  letter-spacing: -0.015em;
+}
+
+.duo__sabor {
+  color: var(--tinta-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.duo__precio {
+  margin-top: 0.3rem;
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+
+.duo__precio small {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.duo__ver {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+@media (min-width: 640px) {
+  .hB__solo-amplio {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  .hB__ctas .btn {
+    flex: 0 0 auto;
+  }
+
+  .duo__item {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    align-items: end;
+  }
+
+  .duo__campo--colagen {
+    margin-top: 3rem;
+  }
+}
+
+/* ── Escritorio: título a la izquierda, acciones a la derecha; debajo, dos campos
+      a todo el ancho que funcionan como repisa para los productos. ── */
+@media (min-width: 960px) {
+  .hB {
+    padding-top: 2.5rem;
+  }
+
+  .hB__top {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    column-gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .hB__ctas {
+    margin-top: 1.1rem;
+  }
+
+  .duo {
+    grid-template-columns: 58fr 42fr;
+    align-items: end;
+    gap: 0;
+    margin-top: 2.5rem;
+    padding: 0;
+  }
+
+  .duo__campo {
+    border-radius: 0;
+  }
+
+  .duo__campo--detox {
+    border-bottom-width: 0.875rem;
+    padding-left: max(var(--g), calc((100vw - var(--max)) / 2));
+  }
+
+  .duo__campo--colagen {
+    margin-top: 0;
+    border-bottom-width: 0.875rem;
+    padding-right: max(var(--g), calc((100vw - var(--max)) / 2));
+  }
+
+  .duo__item {
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    padding-top: 2.5rem;
+  }
+
+  .duo__campo--colagen .duo__item {
+    padding-left: clamp(1.5rem, 3vw, 2.75rem);
+  }
+
+  /* Las fotos se apoyan sobre la banda, como envases en una repisa. */
+  .duo__item img {
+    width: auto;
+    height: min(calc(100svh - var(--hdr) - 19.5rem), 27rem);
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+
+  .duo__campo--colagen .duo__item img {
+    height: min(calc(100svh - var(--hdr) - 23.5rem), 22rem);
+  }
+
+  .duo__texto {
+    padding: 0 0 2rem;
+  }
+
+  .duo__nombre {
+    font-size: clamp(2rem, 1rem + 2vw, 3rem);
+  }
+
+  .duo__campo--colagen .duo__nombre {
+    font-size: clamp(1.6rem, 0.9rem + 1.4vw, 2.25rem);
+  }
+
+  .duo__sabor {
+    font-size: 1rem;
+  }
+
+  .duo__precio {
+    font-size: 1.5rem;
+  }
+}
+
+/* Entrada única: los dos campos suben, DetoxPlus primero. */
+@media (prefers-reduced-motion: no-preference) {
+  .duo__campo {
+    animation: hB-sube 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  }
+
+  .duo__campo--colagen {
+    animation-delay: 0.14s;
+  }
+}
+
+@keyframes hB-sube {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}

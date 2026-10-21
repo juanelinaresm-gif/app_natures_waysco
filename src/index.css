@@ -1,0 +1,125 @@
+/* Base del diseño de Claude Design «Diseño dinámico Natures Wayco».
+   Valores tomados del archivo Natures Wayco.dc.html (visual-pieces/diseno/).
+   Añadidos sin efecto visual para el uso con ratón: foco visible con teclado, enlace para saltar
+   al contenido, margen de desplazamiento bajo la barra fija y movimiento reducido. */
+
+:root {
+  --bg: #faf6ee;
+  --ink: #1c2b22;
+  --teal: #0e5e75;
+  --green: #7fae2a;
+  --lime: #9bcb3f;
+  --amber: #f2a422;
+  --text-2: #33433a;
+  --text-3: #4a5b50;
+  --font: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-padding-top: 80px; /* alto de la barra fija */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--teal);
+}
+
+@keyframes mq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.picture {
+  display: contents;
+}
+
+/* Con display: contents, los <source> serían elementos vacíos de la grilla del contenedor. */
+.picture > source {
+  display: none;
+}
+
+/* Raíz de la página, como en el diseño: recorta el sangrado lateral de la cinta inclinada. */
+.page {
+  overflow-x: clip;
+}
+
+/* Bloques de título que recortan el texto mientras sube (data-r="up"). */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-line > span {
+  display: block;
+}
+
+:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
