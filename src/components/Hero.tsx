@@ -6,8 +6,8 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-// Portada del diseño: titular de tres líneas, texto y CTA junto al video completo (16:9) con sus
-// bordes fundidos en el fondo, y control de pausa.
+// Portada del diseño. Escritorio (≥ 960 px): video de fondo a sangre con los degradados del diseño
+// y el texto encima. Móvil y tableta: texto y luego el video completo (16:9). Control de pausa.
 // Además del diseño: se pausa fuera de pantalla o con la pestaña oculta (y respeta la pausa manual
 // al volver) y, con movimiento reducido, no se reproduce sola: queda el póster (su primer cuadro).
 export function Hero() {
@@ -89,7 +89,7 @@ export function Hero() {
             </a>
           </div>
         </div>
-        {/* Video completo en su proporción 16:9; los bordes se funden con el fondo de la portada. */}
+        {/* Escritorio: fondo de la portada. Móvil y tableta: bloque 16:9 bajo el texto. */}
         <div className="hero__visual">
           <div className="hero__media">
             <video
@@ -111,6 +111,8 @@ export function Hero() {
               onPause={() => setPaused(true)}
             />
           </div>
+          <div className="hero__fade-x" aria-hidden="true" />
+          <div className="hero__fade-y" aria-hidden="true" />
           <button
             type="button"
             className="hero__toggle"

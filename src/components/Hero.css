@@ -149,47 +149,114 @@
   }
 }
 
-/* Dos columnas: escritorio, o móvil en horizontal con poca altura. */
-@media (min-width: 960px), (min-width: 600px) and (max-height: 540px) and (orientation: landscape) {
-  .hero__inner {
-    max-width: none;
-    padding-left: max(var(--pad-x), calc((100% - 1240px) / 2 + var(--pad-x)));
-    padding-right: 0;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+/* Degradados del video de fondo: solo existen en escritorio. */
+.hero__fade-x,
+.hero__fade-y {
+  display: none;
+}
+
+/* Escritorio: portada original del diseño. Video de fondo a sangre (cover, escala 1,08) con su
+   degradado horizontal e inferior, y el texto encima. Valores tal como estaban en 3e7d422. */
+@media (min-width: 960px) {
+  .hero {
+    position: relative;
+    min-height: min(88vh, 820px);
+    display: flex;
     align-items: center;
-    column-gap: clamp(24px, 4vw, 56px);
+    overflow: hidden;
+    background: #f3eee4;
+    padding-block: 0;
+  }
+
+  .hero__inner {
+    position: static;
+    display: block;
+    width: 100%;
+    max-width: 1240px;
+    padding: 96px 32px 120px;
+  }
+
+  .hero__text {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
   }
 
   .hero__visual {
-    margin-inline: 0;
-    width: 100%;
-    max-width: 1024px; /* nunca más ancho que el original */
-    justify-self: end;
+    position: absolute;
+    inset: 0;
+    margin: 0;
   }
 
-  /* Borde izquierdo: transición estrecha hacia el fondo del texto; arriba y abajo, sutiles.
-     A la derecha el video llega al borde de la pantalla. */
   .hero__media {
-    -webkit-mask-image:
-      linear-gradient(90deg, transparent, #000 7%),
-      linear-gradient(180deg, transparent, #000 5%, #000 92%, transparent);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(90deg, transparent, #000 7%),
-      linear-gradient(180deg, transparent, #000 5%, #000 92%, transparent);
-    mask-composite: intersect;
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    will-change: transform;
+  }
+
+  .hero__fade-x {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #faf6ee 0%,
+      rgba(250, 246, 238, 0.94) 30%,
+      rgba(250, 246, 238, 0.55) 55%,
+      rgba(250, 246, 238, 0) 80%
+    );
+  }
+
+  .hero__fade-y {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 120px;
+    background: linear-gradient(0deg, #faf6ee, rgba(250, 246, 238, 0));
+  }
+
+  .hero__lead {
+    font-size: 20px;
+    margin: 32px 0 0;
+  }
+
+  .hero__actions {
+    margin-top: 36px;
+  }
+
+  .hero__cta {
+    padding: 18px 28px;
+  }
+
+  .hero__ghost {
+    padding: 16px 26px;
   }
 
   .hero__toggle {
-    right: clamp(16px, 3vw, 40px);
-    bottom: 16px;
+    z-index: 1;
+    right: clamp(24px, 4vw, 48px);
+    bottom: 40px;
     width: 52px;
     height: 52px;
   }
 }
 
-/* Pantallas bajas en horizontal: menos aire vertical. */
-@media (max-height: 540px) and (orientation: landscape) {
+/* Móviles en horizontal (pantallas bajas): menos aire vertical. */
+@media (max-width: 959px) and (max-height: 540px) and (orientation: landscape) {
   .hero {
     padding-block: 20px 28px;
   }
