@@ -24,14 +24,15 @@
   min-width: 0;
 }
 
-/* Tres líneas fijas; el tamaño sale del ancho disponible para que «que se integra» quepa
-   entera (5,87 em a -0,03 em de interletra, con 4 % de margen) y, en pantallas bajas, del alto. */
+/* Tres líneas fijas, con el peso y la interletra compacta del diseño. El tamaño sale del ancho
+   disponible para que «que se integra» quepa entera (5,59 em a -0,05 em de interletra, con 4 %
+   de margen) y, en pantallas bajas, del alto. */
 .hero__title {
   margin: 0;
   font-weight: 800;
-  font-size: clamp(2.25rem, min(16.4cqi, 15svh), 6.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, min(17.2cqi, 15svh), 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
   font-variation-settings: 'opsz' 96;
 }
 
@@ -180,6 +181,11 @@
     position: relative;
     z-index: 1;
     max-width: 820px;
+  }
+
+  /* Escritorio: la escala del diseño (8,4 vw, hasta 128 px), limitada por el ancho y el alto. */
+  .hero__title {
+    font-size: min(clamp(60px, 8.4vw, 128px), 17.2cqi, 15svh);
   }
 
   .hero__visual {
