@@ -11,61 +11,76 @@
     box-shadow 0.3s;
 }
 
+
 .nav__inner {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 16px 32px;
-  display: flex;
+  padding: 12px var(--pad-x);
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-template-areas: 'logo . wa menu';
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  column-gap: 8px;
 }
 
 .nav__logo {
+  grid-area: logo;
   display: flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 6px;
   transition: transform 0.3s;
 }
 
-.nav__logo:hover {
-  transform: rotate(-3deg) scale(1.04);
-}
-
 .nav__logo-img {
-  height: 46px;
+  height: 40px;
   width: auto;
   display: block;
   mix-blend-mode: multiply;
 }
 
+/* Móvil: los enlaces viven en un panel que se despliega bajo la barra, sobre el contenido
+   (no empuja la página). */
 .nav__links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-weight: 600;
-  font-size: 15px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  padding: 4px var(--pad-x) 16px;
+  background: #faf6ee;
+  border-bottom: 1px solid rgba(28, 43, 34, 0.12);
+  box-shadow: 0 18px 30px rgba(28, 43, 34, 0.12);
 }
 
-.nav__link:hover {
-  color: #7fae2a;
+.nav.is-open .nav__links {
+  display: flex;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  border-top: 1px solid rgba(28, 43, 34, 0.12);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.03em;
 }
 
 .nav__wa {
+  grid-area: wa;
+  min-height: 44px;
   background: #0e5e75;
   color: #fff;
-  padding: 11px 20px;
+  padding: 0 18px;
   border-radius: 999px;
   font-weight: 700;
+  font-size: 15px;
   display: flex;
   align-items: center;
   gap: 8px;
   transition: transform 0.25s;
-}
-
-.nav__wa:hover {
-  transform: translateY(-2px) rotate(-2deg);
-  color: #fff;
 }
 
 .nav__dot {
@@ -73,4 +88,123 @@
   height: 8px;
   border-radius: 50%;
   background: #a6d44a;
+}
+
+.nav__menu {
+  all: unset;
+  grid-area: menu;
+  box-sizing: border-box;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #1c2b22;
+  color: #faf6ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.nav__burger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav__burger span {
+  width: 16px;
+  height: 2px;
+  background: #9bcb3f;
+  transition: transform 0.25s;
+}
+
+.nav__burger span + span {
+  background: #f2a422;
+}
+
+.nav.is-open .nav__burger span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.nav.is-open .nav__burger span + span {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* Pantallas muy angostas: el botón de menú queda solo con su ícono (el nombre accesible sigue). */
+@media (max-width: 379px) {
+  .nav__menu {
+    padding: 0;
+  }
+
+  .nav__menu-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .nav__wa {
+    padding: 0 14px;
+  }
+}
+
+/* Escritorio: diseño original, todo en una fila. */
+@media (min-width: 768px) {
+  .nav__inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'logo links wa';
+    column-gap: 28px;
+    padding-block: 16px;
+  }
+
+  .nav__logo-img {
+    height: 46px;
+  }
+
+  .nav__links,
+  .nav.is-open .nav__links {
+    position: static;
+    grid-area: links;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 28px;
+    padding: 0;
+  }
+
+  .nav__link {
+    min-height: 44px;
+    border: 0;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+
+  .nav__menu {
+    display: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav__logo:hover {
+    transform: rotate(-3deg) scale(1.04);
+  }
+
+  .nav__link:hover {
+    color: #7fae2a;
+  }
+
+  .nav__wa:hover {
+    transform: translateY(-2px) rotate(-2deg);
+    color: #fff;
+  }
 }

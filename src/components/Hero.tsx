@@ -6,7 +6,8 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-// Portada del diseño: video a sangre con degradados, titular a la izquierda y control de pausa.
+// Portada del diseño: titular de tres líneas, texto y CTA junto al video completo (16:9) con sus
+// bordes fundidos en el fondo, y control de pausa.
 // Además del diseño: se pausa fuera de pantalla o con la pestaña oculta (y respeta la pausa manual
 // al volver) y, con movimiento reducido, no se reproduce sola: queda el póster (su primer cuadro).
 export function Hero() {
@@ -54,62 +55,72 @@ export function Hero() {
 
   return (
     <header id="top" className="hero" aria-labelledby="hero-title">
-      <video
-        ref={videoRef}
-        className="hero__video"
-        src={heroVideo.src}
-        poster={heroVideo.poster}
-        autoPlay={autoplay}
-        muted
-        loop
-        playsInline
-        preload={autoplay ? 'auto' : 'metadata'}
-        disablePictureInPicture
-        tabIndex={-1}
-        aria-hidden="true"
-        onPlay={() => setPaused(false)}
-        onPause={() => setPaused(true)}
-        onEnded={(e) => {
-          e.currentTarget.currentTime = 0
-          e.currentTarget.play().catch(() => {})
-        }}
-      />
-      <div className="hero__fade-x" aria-hidden="true" />
-      <div className="hero__fade-y" aria-hidden="true" />
       <div className="hero__inner">
-        <h1 id="hero-title" className="hero__title">
-          <span className="hero__line">
-            <span data-r="up" data-d="0">
-              Bienestar que se
+        <div className="hero__text">
+          {/* Un solo h1; cada línea es un bloque. Los espacios entre bloques mantienen el texto
+              continuo para lectores de pantalla y al copiar. */}
+          <h1 id="hero-title" className="hero__title">
+            <span className="hero__line">
+              <span data-r="up" data-d="0">
+                Bienestar
+              </span>
+            </span>{' '}
+            <span className="hero__line">
+              <span data-r="up" data-d="60">
+                que se <span className="hero__green">integra</span>
+              </span>
+            </span>{' '}
+            <span className="hero__line">
+              <span data-r="up" data-d="120">
+                a tu <span className="hero__amber">día</span>
+              </span>
             </span>
-          </span>
-          <span className="hero__line">
-            <span data-r="up" data-d="120">
-              <span className="hero__green">integra</span> a tu <span className="hero__amber">día</span>
-            </span>
-          </span>
-        </h1>
-        <p className="hero__lead" data-r="fade" data-d="380">
-          Dos mezclas en polvo para preparar bebidas en casa: DetoxPlus, nuestra bebida verde a base
-          de manzana verde, y ColagenPlus, con colágeno hidrolizado y resveratrol.
-        </p>
-        <div className="hero__actions" data-r="fade" data-d="500">
-          <a className="hero__cta" href="#detox">
-            Conoce DetoxPlus
-          </a>
-          <a className="hero__ghost" href="#productos">
-            Ver productos
-          </a>
+          </h1>
+          <p className="hero__lead" data-r="fade" data-d="160">
+            Dos mezclas en polvo para preparar bebidas en casa: DetoxPlus, nuestra bebida verde a base
+            de manzana verde, y ColagenPlus, con colágeno hidrolizado y resveratrol.
+          </p>
+          <div className="hero__actions" data-r="fade" data-d="220">
+            <a className="hero__cta" href="#detox">
+              Conoce DetoxPlus
+            </a>
+            <a className="hero__ghost" href="#productos">
+              Ver productos
+            </a>
+          </div>
+        </div>
+        {/* Video completo en su proporción 16:9; los bordes se funden con el fondo de la portada. */}
+        <div className="hero__visual">
+          <div className="hero__media">
+            <video
+              ref={videoRef}
+              className="hero__video"
+              src={heroVideo.src}
+              poster={heroVideo.poster}
+              width={1024}
+              height={576}
+              autoPlay={autoplay}
+              muted
+              loop
+              playsInline
+              preload={autoplay ? 'auto' : 'metadata'}
+              disablePictureInPicture
+              tabIndex={-1}
+              aria-hidden="true"
+              onPlay={() => setPaused(false)}
+              onPause={() => setPaused(true)}
+            />
+          </div>
+          <button
+            type="button"
+            className="hero__toggle"
+            onClick={toggle}
+            aria-label={paused ? 'Reproducir video' : 'Pausar video'}
+          >
+            <span aria-hidden="true">{paused ? '▶' : '❚❚'}</span>
+          </button>
         </div>
       </div>
-      <button
-        type="button"
-        className="hero__toggle"
-        onClick={toggle}
-        aria-label={paused ? 'Reproducir video' : 'Pausar video'}
-      >
-        <span aria-hidden="true">{paused ? '▶' : '❚❚'}</span>
-      </button>
     </header>
   )
 }

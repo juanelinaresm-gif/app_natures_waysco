@@ -5,7 +5,7 @@
 .rutina__inner {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 96px 32px;
+  padding: clamp(64px, 8vw, 96px) var(--pad-x);
 }
 
 .rutina__head {
@@ -40,28 +40,70 @@
   text-wrap: pretty;
 }
 
+/* Móvil y tableta: pasos en columna, unidos por una línea vertical que baja al aparecer.
+   Desde 900 px: tres columnas y la línea horizontal del diseño. */
 .rutina__steps {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
 }
 
-/* Línea del día: se dibuja de izquierda a derecha al aparecer. */
 .rutina__line {
   position: absolute;
-  left: 28px;
-  right: 28px;
-  top: 27px;
-  height: 3px;
+  left: 27px;
+  top: 28px;
+  bottom: 28px;
+  width: 3px;
   background: #1c2b22;
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rutina__line[data-drawn] {
+  transform: none;
 }
 
 .rutina__step {
   position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 20px;
+}
+
+.rutina__step > :not(.rutina__num) {
+  grid-column: 2;
+}
+
+.rutina__num {
+  grid-row: 1 / span 2;
+}
+
+@media (min-width: 900px) {
+  .rutina__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .rutina__line {
+    left: 28px;
+    right: 28px;
+    top: 27px;
+    bottom: auto;
+    width: auto;
+    height: 3px;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .rutina__line[data-drawn] {
+    transform: none;
+  }
+
+  .rutina__step {
+    display: block;
+  }
 }
 
 .rutina__num {
@@ -77,7 +119,7 @@
 }
 
 .rutina__step-title {
-  margin: 22px 0 8px;
+  margin: 12px 0 8px;
   font-weight: 800;
   font-size: 26px;
   letter-spacing: -0.035em;
@@ -117,8 +159,17 @@
   margin: 0;
   font-size: 15.5px;
   line-height: 1.45;
-  flex: 1;
-  min-width: 280px;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+/* Con el texto en varias líneas, la píldora pasa a tarjeta redondeada. */
+@media (max-width: 899px) {
+  .rutina__label {
+    margin-top: 40px;
+    border-radius: 28px;
+    padding: 20px 22px;
+  }
 }
 
 .rutina__label-text strong {
@@ -126,8 +177,18 @@
 }
 
 .rutina__note {
-  margin: 12px 28px 0;
+  margin: 12px 4px 0;
   font-size: 12.5px;
   line-height: 1.5;
   color: #4a5b50;
+}
+
+@media (min-width: 900px) {
+  .rutina__step-title {
+    margin-top: 22px;
+  }
+
+  .rutina__note {
+    margin-inline: 28px;
+  }
 }

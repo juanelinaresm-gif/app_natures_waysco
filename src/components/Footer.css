@@ -1,6 +1,6 @@
 .footer {
   background: #fff;
-  padding: 80px 32px 48px;
+  padding: clamp(56px, 8vw, 80px) var(--pad-x) calc(48px + env(safe-area-inset-bottom));
 }
 
 .footer__inner {
@@ -24,20 +24,29 @@
 .footer__col {
   display: flex;
   flex-direction: column;
-  gap: 14px;
   font-size: 17px;
   font-weight: 500;
 }
 
-.footer__link:hover {
-  color: #7fae2a;
+/* 44 px de alto por enlace; el espaciado visual del diseño (14 px) queda dentro de cada uno. */
+.footer__col a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block: -6px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__link:hover {
+    color: #7fae2a;
+  }
 }
 
 .footer__legal {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 64px;
+  margin-top: clamp(40px, 6vw, 64px);
   padding-top: 28px;
   border-top: 1px solid #e4e1d8;
   font-size: 14px;

@@ -13,6 +13,10 @@
   --text-2: #33433a;
   --text-3: #4a5b50;
   --font: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+  /* Márgenes fluidos: 20 px en móvil, 32 px (valor del diseño) desde ~640 px. */
+  --pad-x: clamp(20px, 5vw, 32px);
+  /* Aire vertical de las secciones: 64 px en móvil, 120 px (diseño) en escritorio. */
+  --section-y: clamp(64px, 10vw, 120px);
 }
 
 html,
@@ -28,6 +32,12 @@ html {
   scroll-padding-top: 80px; /* alto de la barra fija */
 }
 
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -39,8 +49,10 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--teal);
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    color: var(--teal);
+  }
 }
 
 @keyframes mq {
@@ -59,11 +71,6 @@ a:hover {
 /* Con display: contents, los <source> serían elementos vacíos de la grilla del contenedor. */
 .picture > source {
   display: none;
-}
-
-/* Raíz de la página, como en el diseño: recorta el sangrado lateral de la cinta inclinada. */
-.page {
-  overflow-x: clip;
 }
 
 /* Bloques de título que recortan el texto mientras sube (data-r="up"). */
@@ -103,7 +110,10 @@ main:focus {
   left: 1rem;
   top: -4rem;
   z-index: 200;
-  padding: 0.75rem 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 1.1rem;
   border-radius: 999px;
   background: var(--ink);
   color: var(--bg);

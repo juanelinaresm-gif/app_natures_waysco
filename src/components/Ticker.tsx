@@ -14,14 +14,16 @@ const WORDS: [string, string][] = [
 // Cinta inclinada en movimiento. Es decorativa: repite palabras que ya están en la página.
 export function Ticker() {
   return (
-    <div className="ticker" aria-hidden="true">
-      <div className="ticker__track">
-        {[...WORDS, ...WORDS].map(([word, color], i) => (
-          <div key={i} className="ticker__item">
-            <span style={{ color }}>{word}</span>
-            <span className="ticker__gem" />
-          </div>
-        ))}
+    <div className="ticker-band" aria-hidden="true">
+      <div className="ticker">
+        <div className="ticker__track">
+          {[...WORDS, ...WORDS].map(([word, color], i) => (
+            <div key={i} className="ticker__item">
+              <span style={{ color }}>{word}</span>
+              <span className="ticker__gem" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

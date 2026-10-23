@@ -1,0 +1,183 @@
+OK   [movil-320] sin desbordamiento horizontal — scrollWidth=320, ancho=320
+OK   [movil-320] áreas táctiles de al menos 44 × 44 px
+OK   [movil-320] sin texto recortado
+OK   [movil-320] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 45.92px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-320] CTA de portada completos y sin recortes — portada 723 px
+OK   [movil-320] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-320] todas las entradas terminan visibles
+OK   [movil-320] los precios terminan su animación
+OK   [movil-320] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-320] sin errores en consola
+OK   [movil-320] sin solicitudes externas
+OK   [movil-375] sin desbordamiento horizontal — scrollWidth=375, ancho=375
+OK   [movil-375] áreas táctiles de al menos 44 × 44 px
+OK   [movil-375] sin texto recortado
+OK   [movil-375] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 54.94px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-375] CTA de portada completos y sin recortes — portada 757 px
+OK   [movil-375] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-820.avif, colagen-jar-1010.avif, esencia-bosque-714.avif, logo-diseno-420.webp
+OK   [movil-375] todas las entradas terminan visibles
+OK   [movil-375] los precios terminan su animación
+OK   [movil-375] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-375] sin errores en consola
+OK   [movil-375] sin solicitudes externas
+OK   [tableta-768] sin desbordamiento horizontal — scrollWidth=768, ancho=768
+OK   [tableta-768] áreas táctiles de al menos 44 × 44 px
+OK   [tableta-768] sin texto recortado
+OK   [tableta-768] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 104px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [tableta-768] CTA de portada completos y sin recortes — portada 1070 px
+OK   [tableta-768] imágenes con alt, dimensiones y carga correcta (5)
+OK   [tableta-768] todas las entradas terminan visibles
+OK   [tableta-768] los precios terminan su animación
+OK   [tableta-768] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [tableta-768] sin errores en consola
+OK   [tableta-768] sin solicitudes externas
+OK   [escritorio-1440] sin desbordamiento horizontal — scrollWidth=1440, ancho=1440
+OK   [escritorio-1440] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1440] sin texto recortado
+OK   [escritorio-1440] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 87.2634px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1440] CTA de portada completos y sin recortes — portada 669 px
+OK   [escritorio-1440] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-480.avif, colagen-jar-500.avif, esencia-bosque-480.avif, logo-diseno-420.webp
+OK   [escritorio-1440] todas las entradas terminan visibles
+OK   [escritorio-1440] los precios terminan su animación
+OK   [escritorio-1440] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1440] sin errores en consola
+OK   [escritorio-1440] sin solicitudes externas
+OK   [escritorio-2560] sin desbordamiento horizontal — scrollWidth=2560, ancho=2560
+OK   [escritorio-2560] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-2560] sin texto recortado
+OK   [escritorio-2560] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 104px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-2560] CTA de portada completos y sin recortes — portada 736 px
+OK   [escritorio-2560] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-2560] todas las entradas terminan visibles
+OK   [escritorio-2560] los precios terminan su animación
+OK   [escritorio-2560] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-2560] sin errores en consola
+OK   [escritorio-2560] sin solicitudes externas
+OK   [movil-390] sin desbordamiento horizontal — scrollWidth=390, ancho=390
+OK   [movil-390] áreas táctiles de al menos 44 × 44 px
+OK   [movil-390] sin texto recortado
+OK   [movil-390] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 57.4px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-390] CTA de portada completos y sin recortes — portada 773 px
+OK   [movil-390] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-390] todas las entradas terminan visibles
+OK   [movil-390] los precios terminan su animación
+OK   [movil-390] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-390] sin errores en consola
+OK   [movil-390] sin solicitudes externas
+OK   [movil-430] sin desbordamiento horizontal — scrollWidth=430, ancho=430
+OK   [movil-430] áreas táctiles de al menos 44 × 44 px
+OK   [movil-430] sin texto recortado
+OK   [movil-430] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 63.468px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-430] CTA de portada completos y sin recortes — portada 789 px
+OK   [movil-430] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-430] todas las entradas terminan visibles
+OK   [movil-430] los precios terminan su animación
+OK   [movil-430] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-430] sin errores en consola
+OK   [movil-430] sin solicitudes externas
+OK   [escritorio-1024] sin desbordamiento horizontal — scrollWidth=1024, ancho=1024
+OK   [escritorio-1024] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1024] sin texto recortado
+OK   [escritorio-1024] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 66.2868px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1024] CTA de portada completos y sin recortes — portada 594 px
+OK   [escritorio-1024] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-1024] todas las entradas terminan visibles
+OK   [escritorio-1024] los precios terminan su animación
+OK   [escritorio-1024] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1024] sin errores en consola
+OK   [escritorio-1024] sin solicitudes externas
+OK   [escritorio-1280] sin desbordamiento horizontal — scrollWidth=1280, ancho=1280
+OK   [escritorio-1280] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1280] sin texto recortado
+OK   [escritorio-1280] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 82.0231px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1280] CTA de portada completos y sin recortes — portada 644 px
+OK   [escritorio-1280] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-1280] todas las entradas terminan visibles
+OK   [escritorio-1280] los precios terminan su animación
+OK   [escritorio-1280] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1280] sin errores en consola
+OK   [escritorio-1280] sin solicitudes externas
+OK   [movil-horizontal-844x390] sin desbordamiento horizontal — scrollWidth=844, ancho=844
+OK   [movil-horizontal-844x390] áreas táctiles de al menos 44 × 44 px
+OK   [movil-horizontal-844x390] sin texto recortado
+OK   [movil-horizontal-844x390] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 54.243px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-horizontal-844x390] CTA de portada completos y sin recortes — portada 486 px
+OK   [movil-horizontal-844x390] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-horizontal-844x390] todas las entradas terminan visibles
+OK   [movil-horizontal-844x390] los precios terminan su animación
+OK   [movil-horizontal-844x390] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-horizontal-844x390] sin errores en consola
+OK   [movil-horizontal-844x390] sin solicitudes externas
+OK   [zoom-200] sin desbordamiento horizontal — scrollWidth=720, ancho=720
+OK   [zoom-200] áreas táctiles de al menos 44 × 44 px
+OK   [zoom-200] sin texto recortado
+OK   [zoom-200] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 45.9456px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [zoom-200] CTA de portada completos y sin recortes — portada 461 px
+OK   [zoom-200] imágenes con alt, dimensiones y carga correcta (5)
+OK   [zoom-200] todas las entradas terminan visibles
+OK   [zoom-200] los precios terminan su animación
+OK   [zoom-200] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [zoom-200] sin errores en consola
+OK   [zoom-200] sin solicitudes externas
+OK   anclas internas válidas (12)
+OK   WhatsApp «WhatsApp» — sin mensaje precargado
+OK   WhatsApp «Pedir por WhatsApp →: DetoxPlus» en #detox — mensaje: "Hola, quiero pedir DetoxPlus ($70.000 COP)"
+OK   WhatsApp «Pedir por WhatsApp →: ColagenPlus» en #colagen — mensaje: "Hola, quiero pedir ColagenPlus ($130.000 COP)"
+OK   WhatsApp «Escríbenos por WhatsApp» — sin mensaje precargado
+OK   WhatsApp «WhatsApp +57 312 447 5525» — sin mensaje precargado
+OK   enlaces de Instagram — https://instagram.com/natures_wayco, https://instagram.com/natures_wayco
+OK   DetoxPlus: nombre, precio y envase corresponden — DetoxPlus | $70.000 | /media/detox-jar-820.png
+OK   ColagenPlus: nombre, precio y envase corresponden — ColagenPlus | $130.000 | /media/colagen-jar-1010.png
+OK   DetoxPlus aparece antes que ColagenPlus — detox, colagen
+OK   un solo h1
+     títulos: H1:Bienestar que se integra a tu día / H2:Nuestrosproductos / H3:DetoxPlus / H3:ColagenPlus / H2:Tu rutina / H3:Tenlo a la vista / H3:Súmalo a algo que ya haces / H3:Elige el que va contigo / H2:Nuestraesencia / H2:Preguntasfrecuentes / H2:¿Hablamos?
+OK   [movil-375] primer Tab: enlace para saltar al contenido
+OK   [movil-375] foco visible en 23 paradas de Tab
+OK   [movil-375] el elemento enfocado queda en pantalla
+OK   [movil-375] el video no recibe foco
+     orden de foco: Saltar al contenido → Nature’s Wayco, ir al inicio → Menú → WhatsApp → Conoce DetoxPlus → Ver productos → Pausar video → Pedir por WhatsApp →: DetoxPlus → Pedir por WhatsApp →: ColagenPlus → ¿Cómo hago un pedido?+ → ¿Cómo sé si hay envío a mi ciudad y si e → ¿Qué productos tienen?+ …
+OK   [movil-375] Enter en «Preguntas» lleva a la sección — top=76
+OK   [movil-375] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":164}
+OK   [escritorio-1440] primer Tab: enlace para saltar al contenido
+OK   [escritorio-1440] foco visible en 26 paradas de Tab
+OK   [escritorio-1440] el elemento enfocado queda en pantalla
+OK   [escritorio-1440] el video no recibe foco
+OK   [escritorio-1440] Enter en «Preguntas» lleva a la sección — top=80
+OK   [escritorio-1440] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":82}
+OK   [movil-320] menú móvil: abre con teclado, recorre enlaces y cierra con Escape devolviendo el foco — {"barra":"69 px","abierto":"true","primerEnlace":"Productos","trasEscape":{"expanded":"false","panel":"none","focus":"botón","navH":69}}
+OK   [movil-320] menú móvil: un enlace navega y cierra el menú — #rutina, false
+OK   [movil-320] menú móvil: se cierra al tocar fuera
+OK   [movil-375] menú móvil: abre con teclado, recorre enlaces y cierra con Escape devolviendo el foco — {"barra":"69 px","abierto":"true","primerEnlace":"Productos","trasEscape":{"expanded":"false","panel":"none","focus":"botón","navH":69}}
+OK   [movil-375] menú móvil: un enlace navega y cierra el menú — #rutina, false
+OK   [movil-375] menú móvil: se cierra al tocar fuera
+OK   [movil-375] sin saltos de diseño al cargar (CLS < 0,1) — CLS 0
+OK   [escritorio-1440] sin saltos de diseño al cargar (CLS < 0,1) — CLS 0
+OK   portada: video automático, en bucle, silenciado y en línea — avanzó 1.2 s en 1,2 s, 1024×576
+OK   portada: sin sonido (0 bytes de audio decodificados) — 0
+OK   portada: video completo (16:9, contain, sin escala ni recorte) y decorativo — {"fit":"contain","transform":"none","ratio":1.778,"poster":"portada-video-poster-1024.webp"}
+OK   portada: se pausa fuera de pantalla y reanuda al volver — {"away":true,"back":false}
+OK   portada: control de pausa (▶ / ❚❚), pausa manual respetada al volver — {"manual":{"paused":true,"label":"Reproducir video","icon":"▶"},"manualBack":true,"resumed":{"paused":false,"label":"Pausar video","icon":"❚❚"}}
+OK   portada: se pausa con la pestaña oculta y reanuda al volver — {"hiddenPaused":true,"visiblePlaying":true}
+OK   portada: «Conoce DetoxPlus» lleva a #detox — #detox
+OK   portada: «Ver productos» lleva a #productos — #productos
+OK   portada: sin errores en consola
+OK   portada: si el video falla quedan el fondo y el texto, sin errores — {"label":"Reproducir video","title":"1","errores":0}
+OK   movimiento reducido: sin entradas, cinta ni paralaje; línea completa; video en pausa con su póster — {"paused":true,"autoplay":false,"label":"Reproducir video","entradasOcultas":0,"cinta":"none","linea":"none","motion":"off"}
+OK   movimiento reducido: el video se reproduce solo al pedirlo — {"paused":false,"label":"Pausar video"}
+OK   [movil-375] contraste del texto oscuro de portada al inicio del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [movil-375] contraste del texto oscuro de portada a la mitad del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [movil-375] contraste del texto oscuro de portada al final del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [tableta-768] contraste del texto oscuro de portada al inicio del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [tableta-768] contraste del texto oscuro de portada a la mitad del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [tableta-768] contraste del texto oscuro de portada al final del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada al inicio del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada a la mitad del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-1440] contraste del texto oscuro de portada al final del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada al inicio del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada a la mitad del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+OK   [escritorio-2560] contraste del texto oscuro de portada al final del clip — titular 12.81:1 (mín. 3), texto 9.06:1 (mín. 4,5)
+
+176/176 verificaciones correctas
+exit=0

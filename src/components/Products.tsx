@@ -56,7 +56,7 @@ function ProductSection({ product }: { product: Product }) {
       </div>
       <div className="product__grid">
         {variant === 'detox' && visual}
-        <div>
+        <div className="product__text">
           {product.note && (
             <span className="product__badge" data-r="pop">
               {product.note}

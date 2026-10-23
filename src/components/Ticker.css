@@ -1,3 +1,9 @@
+/* La cinta inclinada sobresale 20 px por cada lado: se recorta solo en horizontal y aquí,
+   no en toda la página. En vertical sus esquinas giradas siguen visibles. */
+.ticker-band {
+  overflow-x: clip;
+}
+
 .ticker {
   background: #1c2b22;
   color: #9bcb3f;

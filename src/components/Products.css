@@ -1,7 +1,7 @@
 .products-intro {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 120px 32px 64px;
+  padding: var(--section-y) var(--pad-x) clamp(36px, 6vw, 64px);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -68,15 +68,33 @@
   color: #fbe0a0;
 }
 
+/* Una columna hasta 899 px (envase arriba en los dos productos); dos columnas desde 900 px. */
 .product__grid {
   position: relative;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 120px 32px;
+  padding: var(--section-y) var(--pad-x);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: 72px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 72px);
   align-items: center;
+}
+
+.product__text {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .product--colagen .product__visual {
+    order: -1;
+  }
+}
+
+@media (min-width: 900px) {
+  .product__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .product__visual {
@@ -85,8 +103,14 @@
   place-items: center;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 520px;
+  max-width: min(520px, 100%);
   margin: 0 auto;
+}
+
+@media (max-width: 899px) {
+  .product__visual {
+    max-width: 440px;
+  }
 }
 
 .product__disc {
@@ -135,18 +159,20 @@
   display: block;
 }
 
+/* Tamaño del diseño, limitado por el ancho de la columna: «DetoxPlus» mide 4,08 em y
+   «ColagenPlus» 5,05 em; con 6 % de margen caben enteros desde 320 px. */
 .product--detox .product__name {
   margin: 18px 0 0;
-  font-size: clamp(64px, 8.5vw, 124px);
+  font-size: min(clamp(64px, 8.5vw, 124px), 23cqi);
 }
 
 .product--colagen .product__name {
   margin: 0;
-  font-size: clamp(60px, 8vw, 116px);
+  font-size: min(clamp(60px, 8vw, 116px), 18.6cqi);
 }
 
 .product__summary {
-  font-size: 19px;
+  font-size: clamp(17px, 0.4vw + 15.5px, 19px);
   line-height: 1.55;
   margin: 24px 0 32px;
   text-wrap: pretty;
@@ -165,6 +191,15 @@
 .product__spec-key {
   font-weight: 700;
   font-size: 14px;
+}
+
+/* Móvil angosto: la etiqueta sobre su valor, para no estrechar el texto. */
+@media (max-width: 479px) {
+  .product__spec {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 14px 0;
+  }
 }
 
 .product--detox .product__spec-key,
@@ -219,10 +254,13 @@
 }
 
 .product__order {
-  flex: 1;
-  min-width: 240px;
+  flex: 1 1 240px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
   text-align: center;
-  padding: 18px 26px;
+  padding: 0 26px;
   border-radius: 999px;
   font-weight: 800;
   font-size: 17px;
@@ -235,21 +273,24 @@
   background: #9bcb3f;
 }
 
-.product--detox .product__order:hover {
-  transform: translateY(-3px) rotate(-1.5deg);
-  background: #1c2b22;
-  color: #9bcb3f;
+@media (hover: hover) and (pointer: fine) {
+  .product--detox .product__order:hover {
+    transform: translateY(-3px) rotate(-1.5deg);
+    background: #1c2b22;
+    color: #9bcb3f;
+  }
+
+  .product--colagen .product__order:hover {
+    transform: translateY(-3px) rotate(1.5deg);
+    background: #1c2b22;
+    color: #f2a422;
+  }
 }
 
 .product--colagen .product__order {
   background: #f2a422;
 }
 
-.product--colagen .product__order:hover {
-  transform: translateY(-3px) rotate(1.5deg);
-  background: #1c2b22;
-  color: #f2a422;
-}
 
 .product__note {
   font-size: 13px;
