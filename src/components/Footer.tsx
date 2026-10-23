@@ -30,7 +30,6 @@ export function Footer() {
           </div>
         </div>
         <div className="footer__legal">
-          <span>Precios en pesos colombianos (COP). Envío y disponibilidad se confirman por WhatsApp.</span>
           <span>
             © {year} {brandName} · Powered by MONTSERRAT_AI
           </span>
