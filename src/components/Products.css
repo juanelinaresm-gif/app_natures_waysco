@@ -68,6 +68,17 @@
   color: #fbe0a0;
 }
 
+/* Móvil y tableta: la sección es alta y el texto de fondo, anclado abajo, ya había salido de
+   pantalla al llegar ahí. Se coloca arriba, en el mismo lugar que el de DetoxPlus. */
+@media (max-width: 899px) {
+  .product--colagen .product__ghost {
+    top: 24px;
+    bottom: auto;
+    left: 0;
+    right: auto;
+  }
+}
+
 /* Una columna hasta 899 px (envase arriba en los dos productos); dos columnas desde 900 px. */
 .product__grid {
   position: relative;
