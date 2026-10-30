@@ -7,7 +7,8 @@ function prefersReducedMotion() {
 }
 
 // Portada del diseño. Escritorio (≥ 960 px): video de fondo a sangre con los degradados del diseño
-// y el texto encima. Móvil y tableta: texto y luego el video completo (16:9). Control de pausa.
+// y el texto encima. Móvil y tableta: el video también es el fondo, anclado abajo con el tarro a la
+// vista, bajo un degradado verde oscuro que sostiene el texto claro. Control de pausa.
 // Además del diseño: se pausa fuera de pantalla o con la pestaña oculta (y respeta la pausa manual
 // al volver) y, con movimiento reducido, no se reproduce sola: queda el póster (su primer cuadro).
 export function Hero() {
@@ -77,8 +78,13 @@ export function Hero() {
             </span>
           </h1>
           <p className="hero__lead" data-r="fade" data-d="160">
-            Dos mezclas en polvo para preparar bebidas en casa: DetoxPlus, nuestra bebida verde a base
-            de manzana verde, y ColagenPlus, con colágeno hidrolizado y resveratrol.
+            <span className="hero__lead-desktop">
+              Dos mezclas en polvo para preparar bebidas en casa: DetoxPlus, nuestra bebida verde a
+              base de manzana verde, y ColagenPlus, con colágeno hidrolizado y resveratrol.
+            </span>
+            <span className="hero__lead-mobile">
+              Descubre DetoxPlus y ColagenPlus: dos mezclas para acompañar tu rutina de bienestar.
+            </span>
           </p>
           <div className="hero__actions" data-r="fade" data-d="220">
             <a className="hero__cta" href="#detox">
@@ -89,8 +95,13 @@ export function Hero() {
             </a>
           </div>
         </div>
-        {/* Escritorio: fondo de la portada. Móvil y tableta: bloque 16:9 bajo el texto. */}
+        {/* Fondo de la portada en todos los tamaños; capa absoluta detrás del texto. */}
         <div className="hero__visual">
+          <div
+            className="hero__backdrop"
+            aria-hidden="true"
+            style={{ backgroundImage: `url(${heroVideo.backdrop})` }}
+          />
           <div className="hero__media">
             <video
               ref={videoRef}
@@ -113,6 +124,7 @@ export function Hero() {
           </div>
           <div className="hero__fade-x" aria-hidden="true" />
           <div className="hero__fade-y" aria-hidden="true" />
+          <div className="hero__shade" aria-hidden="true" />
           <button
             type="button"
             className="hero__toggle"

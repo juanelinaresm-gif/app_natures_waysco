@@ -28,6 +28,8 @@ export function mediaUrl(file: string) {
 export const heroVideo = {
   src: mediaUrl('video/home-background.mp4'),
   poster: mediaUrl('portada-video-poster-1024.webp'),
+  /** Móvil y tableta: pared del primer cuadro, difuminada, que completa el fondo sobre el video. */
+  backdrop: mediaUrl('portada-video-fondo-96.webp'),
 }
 
 // Logotipo con fondo blanco: en la barra se integra con mix-blend-mode: multiply, como en el diseño.

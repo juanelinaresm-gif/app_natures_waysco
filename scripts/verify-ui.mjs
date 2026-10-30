@@ -163,7 +163,29 @@ async function checkViewport(browser, vp) {
     const hero = document.querySelector('header#top').getBoundingClientRect()
     const ctas = [...document.querySelectorAll('.hero__actions a')].map((a) => a.getBoundingClientRect())
     const ctasInside = ctas.every((r) => r.top >= hero.top && r.bottom <= hero.bottom && r.left >= 0 && r.right <= document.documentElement.clientWidth)
+    // Composición: título, texto, CTA y control de video dentro de la portada y sin solaparse;
+    // el contenido sin opacidad parcial; el video como capa absoluta, fuera del flujo.
+    const rect = (sel) => document.querySelector(sel).getBoundingClientRect()
+    const parts = [
+      ['título', rect('.hero__title')],
+      ['texto', rect('.hero__lead')],
+      ...ctas.map((r, i) => [`CTA ${i + 1}`, r]),
+      ['control', rect('.hero__toggle')],
+    ]
+    const meets = (a, b) => a.left < b.right - 0.5 && b.left < a.right - 0.5 && a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5
+    const overlaps = []
+    for (let i = 0; i < parts.length; i++)
+      for (let j = i + 1; j < parts.length; j++) if (meets(parts[i][1], parts[j][1])) overlaps.push(`${parts[i][0]}/${parts[j][0]}`)
+    const outside = parts.filter(([, r]) => r.top < hero.top - 0.5 || r.bottom > hero.bottom + 0.5).map(([n]) => n)
+    const faded = []
+    for (let el = document.querySelector('.hero__lead'); el && el !== document.body; el = el.parentElement)
+      if (getComputedStyle(el).opacity !== '1') faded.push(el.className || el.tagName)
+    const visual = getComputedStyle(document.querySelector('.hero__visual')).position
     return {
+      overlaps,
+      outside,
+      faded,
+      visual,
       small,
       clipped,
       lines,
@@ -181,6 +203,16 @@ async function checkViewport(browser, vp) {
     `${layout.fontSize}, líneas ${layout.lines.join('/')}, «${layout.titleText}»`,
   )
   check(`[${vp.name}] CTA de portada completos y sin recortes`, layout.ctasInside, `portada ${layout.heroH} px`)
+  check(
+    `[${vp.name}] portada: título, texto, CTA y control dentro y sin solaparse`,
+    layout.overlaps.length === 0 && layout.outside.length === 0,
+    [...layout.overlaps.map((o) => `solapa ${o}`), ...layout.outside.map((o) => `fuera ${o}`)].join(', '),
+  )
+  check(
+    `[${vp.name}] portada: contenido opaco y video como capa absoluta`,
+    layout.faded.length === 0 && layout.visual === 'absolute',
+    JSON.stringify({ opacidad: layout.faded, video: layout.visual }),
+  )
 
   const images = await page.evaluate(() =>
     [...document.images].map((img) => ({
@@ -450,7 +482,9 @@ async function checkHeroVideo(browser) {
       fit: s.objectFit,
       transform: s.transform,
       ratio: +(v.getBoundingClientRect().width / v.getBoundingClientRect().height).toFixed(3),
-      inside: v.getBoundingClientRect().left >= 0 && v.getBoundingClientRect().right <= document.documentElement.clientWidth + 0.5,
+      // Fracción del ancho del cuadro que queda a la vista y alineación con el borde inferior.
+      shown: +(document.querySelector('header#top').getBoundingClientRect().width / v.getBoundingClientRect().width).toFixed(2),
+      bottom: Math.abs(v.getBoundingClientRect().bottom - document.querySelector('header#top').getBoundingClientRect().bottom) < 1,
       hidden: v.getAttribute('aria-hidden'),
       tabIndex: v.tabIndex,
       poster: v.poster.split('/').pop(),
@@ -463,9 +497,10 @@ async function checkHeroVideo(browser) {
   )
   check('portada: sin sonido (0 bytes de audio decodificados)', st.audioBytes === 0, String(st.audioBytes))
   check(
-    'portada: video completo (16:9, contain, sin escala ni recorte) y decorativo',
-    st.fit === 'contain' && st.transform === 'none' && Math.abs(st.ratio - 16 / 9) < 0.01 && st.inside && st.hidden === 'true' && st.tabIndex === -1,
-    JSON.stringify({ fit: st.fit, transform: st.transform, ratio: st.ratio, poster: st.poster }),
+    'portada móvil: video de fondo en su proporción (16:9), anclado abajo, recorte moderado (≥ 60 % del cuadro) y decorativo',
+    st.fit === 'cover' && st.transform === 'none' && Math.abs(st.ratio - 16 / 9) < 0.01 && st.shown >= 0.6 && st.bottom &&
+      st.hidden === 'true' && st.tabIndex === -1,
+    JSON.stringify({ fit: st.fit, ratio: st.ratio, visible: st.shown, poster: st.poster }),
   )
 
   const state = () =>
@@ -584,16 +619,37 @@ async function checkReducedMotion(browser) {
   await context.close()
 }
 
-// Contraste del texto oscuro de la portada sobre los píxeles reales (video + degradados), con el
-// texto oculto, al inicio, a la mitad y al final del clip. Las palabras en verde y ámbar del
-// titular son colores del diseño y se reportan aparte.
+// Contraste del texto de la portada sobre los píxeles reales (video + degradados), con el texto
+// oculto, en varios cuadros del clip. Móvil y tableta: texto claro sobre el degradado verde, con
+// sus palabras en lima y naranja, en ocho cuadros (incluidos los más claros). Escritorio: texto
+// oscuro del diseño al inicio, a la mitad y al final (sus palabras de color se reportan aparte).
+// El fondo de comparación es el píxel menos favorable (percentil 1 o 99) bajo cada texto.
 async function checkHeroContrast(browser) {
-  for (const vp of [VIEWPORTS[1], VIEWPORTS[2], VIEWPORTS[3], VIEWPORTS[4]]) {
+  const MOBILE = ['movil-320', 'movil-375', 'movil-390', 'movil-430', 'tableta-768', 'movil-horizontal-844x390', 'zoom-200']
+  const targets = (vp) =>
+    MOBILE.includes(vp.name)
+      ? [
+          ['titular', '.hero__line', 3],
+          ['«integra»', '.hero__green', 3],
+          ['«día»', '.hero__amber', 3],
+          ['texto', '.hero__lead', 4.5],
+          ['«Ver productos»', '.hero__ghost', 4.5],
+        ]
+      : [
+          ['titular', '.hero__line', 3],
+          ['texto', '.hero__lead', 4.5],
+        ]
+  const hide = '.hero__title, .hero__lead, .hero__green, .hero__amber, .hero__ghost'
+  for (const vp of VIEWPORTS.filter((v) => [...MOBILE, 'escritorio-1440', 'escritorio-2560'].includes(v.name))) {
     const { context, page } = await newPage(browser, { ...vp, mobile: false }, { deviceScaleFactor: 1 })
     await page.goto(URL_BASE, { waitUntil: 'networkidle' })
     await page.waitForTimeout(1500)
     const duration = await page.evaluate(() => document.querySelector('.hero__video').duration)
-    for (const [label, t] of [['inicio', 0.1], ['mitad', duration / 2], ['final', duration - 0.15]]) {
+    const times = MOBILE.includes(vp.name)
+      ? Array.from({ length: 8 }, (_, i) => +(0.1 + ((duration - 0.25) * i) / 7).toFixed(2))
+      : [0.1, duration / 2, duration - 0.15]
+    const worst = {}
+    for (const t of times) {
       await page.evaluate(async (time) => {
         const v = document.querySelector('.hero__video')
         v.pause()
@@ -603,48 +659,56 @@ async function checkHeroContrast(browser) {
         })
         await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
       }, t)
-      await page.locator('header#top').screenshot({ path: path.join(SHOTS, `${vp.name}-portada-${label}.png`) })
-      await page.evaluate(() => {
-        for (const el of document.querySelectorAll('.hero__title, .hero__lead, .hero__green, .hero__amber')) el.style.color = 'transparent'
-      })
-      const shot = (await page.locator('header#top').screenshot()).toString('base64')
-      const ratios = await page.evaluate(async (b64) => {
-        const img = new Image()
-        img.src = `data:image/png;base64,${b64}`
-        await img.decode()
-        const c = document.createElement('canvas')
-        c.width = img.width
-        c.height = img.height
-        const ctx = c.getContext('2d')
-        ctx.drawImage(img, 0, 0)
-        const lin = (x) => ((x /= 255) <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4)
-        const lum = (r, g, b) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
-        const hero = document.querySelector('header#top').getBoundingClientRect()
-        const out = {}
-        for (const [key, sel, color] of [
-          ['titular', '.hero__line', [28, 43, 34]],
-          ['texto', '.hero__lead', [51, 67, 58]],
-        ]) {
-          const r = document.querySelector(sel).getBoundingClientRect()
-          const d = ctx.getImageData(Math.round(r.left - hero.left), Math.round(r.top - hero.top), Math.round(r.width), Math.round(r.height)).data
-          const v = []
-          for (let i = 0; i < d.length; i += 4) v.push(lum(d[i], d[i + 1], d[i + 2]))
-          v.sort((a, b) => a - b)
-          const bg = v[Math.floor(v.length * 0.01)]
-          const fg = lum(...color)
-          out[key] = +((Math.max(bg, fg) + 0.05) / (Math.min(bg, fg) + 0.05)).toFixed(2)
-        }
-        return out
-      }, shot)
-      await page.evaluate(() => {
-        for (const el of document.querySelectorAll('.hero__title, .hero__lead, .hero__green, .hero__amber')) el.style.color = ''
-      })
-      check(
-        `[${vp.name}] contraste del texto oscuro de portada ${label === 'mitad' ? 'a la mitad' : `al ${label}`} del clip`,
-        ratios.titular >= 3 && ratios.texto >= 4.5,
-        `titular ${ratios.titular}:1 (mín. 3), texto ${ratios.texto}:1 (mín. 4,5)`,
+      await page.locator('header#top').screenshot({ path: path.join(SHOTS, `${vp.name}-portada-${t.toFixed(1)}s.png`) })
+      const colors = await page.evaluate(
+        ([list, sel]) => {
+          const out = list.map(([, s]) => getComputedStyle(document.querySelector(s)).color.match(/\d+/g).slice(0, 3).map(Number))
+          // Sin transición: «Ver productos» anima su color y la captura llegaría a mitad de camino.
+          for (const el of document.querySelectorAll(sel)) Object.assign(el.style, { transition: 'none', color: 'transparent' })
+          return out
+        },
+        [targets(vp), hide],
       )
+      const shot = (await page.locator('header#top').screenshot()).toString('base64')
+      const ratios = await page.evaluate(
+        async ([b64, list, colors]) => {
+          const img = new Image()
+          img.src = `data:image/png;base64,${b64}`
+          await img.decode()
+          const c = document.createElement('canvas')
+          c.width = img.width
+          c.height = img.height
+          const ctx = c.getContext('2d')
+          ctx.drawImage(img, 0, 0)
+          const lin = (x) => ((x /= 255) <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4)
+          const lum = (r, g, b) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+          const hero = document.querySelector('header#top').getBoundingClientRect()
+          return list.map(([, sel], i) => {
+            const r = document.querySelector(sel).getBoundingClientRect()
+            const d = ctx.getImageData(Math.round(r.left - hero.left), Math.round(r.top - hero.top), Math.round(r.width), Math.round(r.height)).data
+            const v = []
+            for (let k = 0; k < d.length; k += 4) v.push(lum(d[k], d[k + 1], d[k + 2]))
+            v.sort((a, b) => a - b)
+            const fg = lum(...colors[i])
+            const bg = fg > v[v.length >> 1] ? v[Math.floor(v.length * 0.99)] : v[Math.floor(v.length * 0.01)]
+            return +((Math.max(bg, fg) + 0.05) / (Math.min(bg, fg) + 0.05)).toFixed(2)
+          })
+        },
+        [shot, targets(vp), colors],
+      )
+      await page.evaluate((sel) => {
+        for (const el of document.querySelectorAll(sel)) Object.assign(el.style, { transition: '', color: '' })
+      }, hide)
+      targets(vp).forEach(([key], i) => {
+        if (!(key in worst) || ratios[i] < worst[key].ratio) worst[key] = { ratio: ratios[i], t }
+      })
     }
+    const list = targets(vp)
+    check(
+      `[${vp.name}] contraste del texto de portada en ${times.length} cuadros del clip`,
+      list.every(([key, , min]) => worst[key].ratio >= min),
+      list.map(([key, , min]) => `${key} ${worst[key].ratio}:1 en ${worst[key].t.toFixed(1)} s (mín. ${min})`).join(', '),
+    )
     await context.close()
   }
 }

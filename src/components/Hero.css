@@ -1,22 +1,11 @@
-/* Portada. Móvil y tableta: texto y luego el video a todo el ancho. Escritorio y móviles en
-   horizontal: texto a la izquierda y video a la derecha hasta el borde de la pantalla.
-   El video conserva su encuadre completo (16:9, contain) y sus bordes se funden con el fondo;
-   el texto nunca queda sobre el video, así que su contraste no depende del fotograma.
-   La altura la dan el contenido y el video, sin mínimos artificiales. */
-
-.hero {
-  --hero-bg: #f3eee4;
-  background: linear-gradient(180deg, var(--hero-bg) 0%, var(--hero-bg) 72%, #faf6ee 100%);
-  padding-block: clamp(28px, 6vw, 72px) clamp(32px, 6vw, 88px);
-}
+/* Portada. Escritorio (≥ 960 px): video de fondo a sangre bajo los degradados claros del diseño y
+   el texto oscuro encima. Móvil y tableta: el video también es el fondo, anclado abajo con un
+   recorte moderado para que el tarro se vea entero; por encima lo completa la pared del primer
+   cuadro, difuminada, y un degradado verde oscuro sostiene el texto claro. */
 
 .hero__inner {
   max-width: 1240px;
   margin: 0 auto;
-  padding-inline: var(--pad-x);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  row-gap: clamp(28px, 5vw, 44px);
 }
 
 .hero__text {
@@ -102,24 +91,10 @@
     color 0.25s;
 }
 
-/* Video: a todo el ancho en móvil (sin márgenes laterales), en su proporción. */
-.hero__visual {
-  position: relative;
-  margin-inline: calc(var(--pad-x) * -1);
-}
-
-.hero__media {
-  aspect-ratio: 16 / 9;
-  /* Degradado: el video se funde arriba y abajo con el fondo. */
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 5%, #000 92%, transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 5%, #000 92%, transparent);
-}
-
 .hero__video {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
 }
 
 .hero__toggle {
@@ -127,8 +102,6 @@
   box-sizing: border-box;
   cursor: pointer;
   position: absolute;
-  right: max(12px, var(--pad-x));
-  bottom: 12px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -142,18 +115,171 @@
   transition: transform 0.25s;
 }
 
-/* Móvil: los dos botones ocupan el ancho y se reparten sin comprimir sus etiquetas. */
-@media (max-width: 599px) {
-  .hero__cta,
-  .hero__ghost {
-    flex: 1 1 200px;
-  }
-}
-
 /* Degradados del video de fondo: solo existen en escritorio. */
 .hero__fade-x,
 .hero__fade-y {
   display: none;
+}
+
+/* Móvil y tableta. El alto lo dan el texto y la franja del producto (--zone, un relleno inferior),
+   sin alturas fijas: si el texto crece, el hero crece con él. */
+@media (max-width: 959px) {
+  .hero {
+    --zone: clamp(210px, 68vw, 400px);
+    --shade: 14, 40, 27;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: rgb(var(--shade));
+    padding: clamp(28px, 7vw, 48px) 0 var(--zone);
+  }
+
+  /* El contenedor no se posiciona: las capas del fondo (.hero__visual) se miden contra .hero. */
+  .hero__inner {
+    padding-inline: var(--pad-x);
+  }
+
+  .hero__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__title {
+    color: #faf6ee;
+  }
+
+  .hero__green {
+    color: #b2dd57;
+  }
+
+  .hero__amber {
+    color: #f7b23b;
+  }
+
+  .hero__lead {
+    max-width: 34ch;
+    color: #e6ede3;
+  }
+
+  .hero__lead-desktop {
+    display: none;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .hero__cta {
+    color: #1c2b22;
+    min-width: min(100%, 260px);
+  }
+
+  /* «Ver productos»: enlace subrayado bajo el botón principal, con área táctil completa. */
+  .hero__ghost {
+    min-height: 44px;
+    padding: 0 2px;
+    border: 0;
+    border-radius: 4px;
+    color: #faf6ee;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+
+  /* Capas del fondo: pared difuminada, video y degradado, en ese orden. */
+  .hero__visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__backdrop {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: 50% 30%;
+  }
+
+  /* El video en su proporción, anclado abajo y centrado: con 2,22 veces el alto de la franja de
+     ancho, se ve ~65 % del cuadro en móvil y ~85 % en tableta, y el tarro queda completo en los dos
+     productos. Su borde superior se funde con la pared difuminada. */
+  .hero__media {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: max(100%, calc(var(--zone) * 2.2222));
+    aspect-ratio: 16 / 9;
+    transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%);
+    mask-image: linear-gradient(180deg, transparent, #000 30%);
+  }
+
+  .hero__video {
+    object-fit: cover;
+  }
+
+  /* Verde oscuro casi opaco detrás del texto, que se aclara sobre la franja del producto. */
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(var(--shade), 0.1) 0,
+      rgba(var(--shade), 0.22) calc(var(--zone) * 0.55),
+      rgba(var(--shade), 0.84) calc(var(--zone) + 24px),
+      rgba(var(--shade), 0.9) 100%
+    );
+  }
+
+  .hero__toggle {
+    z-index: 1;
+    right: var(--pad-x);
+    bottom: 16px;
+  }
+}
+
+/* Móviles en horizontal y ventanas bajas: texto a la izquierda y el tarro a la derecha; el
+   degradado pasa a ser horizontal. */
+@media (max-width: 959px) and (max-height: 540px) and (orientation: landscape) {
+  .hero {
+    padding: 24px 0 28px;
+  }
+
+  .hero__text {
+    max-width: 56%;
+  }
+
+  .hero__lead {
+    font-size: 16px;
+    margin-top: 14px;
+  }
+
+  .hero__actions {
+    margin-top: 18px;
+  }
+
+  /* Todo el alto del hero, con el centro del cuadro al 76 % del ancho: el tarro queda a la
+     derecha del texto. */
+  .hero__media {
+    left: 76%;
+    top: 0;
+    height: 100%;
+    width: auto;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 32%);
+    mask-image: linear-gradient(90deg, transparent, #000 32%);
+  }
+
+  .hero__shade {
+    background: linear-gradient(
+      90deg,
+      rgba(var(--shade), 0.92) 0,
+      rgba(var(--shade), 0.86) 52%,
+      rgba(var(--shade), 0.24) 72%,
+      rgba(var(--shade), 0.1) 100%
+    );
+  }
 }
 
 /* Escritorio: portada original del diseño. Video de fondo a sangre (cover, escala 1,08) con su
@@ -261,19 +387,13 @@
   }
 }
 
-/* Móviles en horizontal (pantallas bajas): menos aire vertical. */
-@media (max-width: 959px) and (max-height: 540px) and (orientation: landscape) {
-  .hero {
-    padding-block: 20px 28px;
-  }
 
-  .hero__lead {
-    font-size: 16px;
-    margin-top: 14px;
-  }
-
-  .hero__actions {
-    margin-top: 18px;
+/* Capas que solo existen en móvil y tableta. */
+@media (min-width: 960px) {
+  .hero__backdrop,
+  .hero__shade,
+  .hero__lead-mobile {
+    display: none;
   }
 }
 
@@ -292,5 +412,14 @@
 
   .hero__toggle:hover {
     transform: scale(1.1);
+  }
+}
+
+/* En móvil y tableta «Ver productos» es un enlace: al pasar el ratón solo cambia de color. */
+@media (hover: hover) and (pointer: fine) and (max-width: 959px) {
+  .hero__ghost:hover {
+    background: none;
+    color: #b2dd57;
+    transform: none;
   }
 }
