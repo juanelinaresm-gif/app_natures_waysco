@@ -1,0 +1,213 @@
+OK   [movil-320] sin desbordamiento horizontal — scrollWidth=320, ancho=320
+OK   [movil-320] áreas táctiles de al menos 44 × 44 px
+OK   [movil-320] sin texto recortado
+OK   [movil-320] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 48.16px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-320] CTA de portada completos y sin recortes — portada 602 px
+OK   [movil-320] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [movil-320] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [movil-320] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-320] todas las entradas terminan visibles
+OK   [movil-320] los precios terminan su animación
+OK   [movil-320] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-320] sin errores en consola
+OK   [movil-320] sin solicitudes externas
+OK   [movil-375] sin desbordamiento horizontal — scrollWidth=375, ancho=375
+OK   [movil-375] áreas táctiles de al menos 44 × 44 px
+OK   [movil-375] sin texto recortado
+OK   [movil-375] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 57.62px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-375] CTA de portada completos y sin recortes — portada 668 px
+OK   [movil-375] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [movil-375] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [movil-375] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-820.avif, colagen-jar-1010.avif, esencia-bosque-714.avif, logo-diseno-420.webp
+OK   [movil-375] todas las entradas terminan visibles
+OK   [movil-375] los precios terminan su animación
+OK   [movil-375] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-375] sin errores en consola
+OK   [movil-375] sin solicitudes externas
+OK   [tableta-768] sin desbordamiento horizontal — scrollWidth=768, ancho=768
+OK   [tableta-768] áreas táctiles de al menos 44 × 44 px
+OK   [tableta-768] sin texto recortado
+OK   [tableta-768] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 121.088px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [tableta-768] CTA de portada completos y sin recortes — portada 1029 px
+OK   [tableta-768] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [tableta-768] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [tableta-768] imágenes con alt, dimensiones y carga correcta (5)
+OK   [tableta-768] todas las entradas terminan visibles
+OK   [tableta-768] los precios terminan su animación
+OK   [tableta-768] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [tableta-768] sin errores en consola
+OK   [tableta-768] sin solicitudes externas
+OK   [escritorio-1440] sin desbordamiento horizontal — scrollWidth=1440, ancho=1440
+OK   [escritorio-1440] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1440] sin texto recortado
+OK   [escritorio-1440] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 120.96px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1440] CTA de portada completos y sin recortes — portada 792 px
+OK   [escritorio-1440] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [escritorio-1440] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [escritorio-1440] imágenes con alt, dimensiones y carga correcta (5)
+     imágenes servidas: logo-diseno-420.webp, detox-jar-480.avif, colagen-jar-500.avif, esencia-bosque-480.avif, logo-diseno-420.webp
+OK   [escritorio-1440] todas las entradas terminan visibles
+OK   [escritorio-1440] los precios terminan su animación
+OK   [escritorio-1440] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1440] sin errores en consola
+OK   [escritorio-1440] sin solicitudes externas
+OK   [escritorio-2560] sin desbordamiento horizontal — scrollWidth=2560, ancho=2560
+OK   [escritorio-2560] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-2560] sin texto recortado
+OK   [escritorio-2560] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 128px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-2560] CTA de portada completos y sin recortes — portada 820 px
+OK   [escritorio-2560] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [escritorio-2560] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [escritorio-2560] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-2560] todas las entradas terminan visibles
+OK   [escritorio-2560] los precios terminan su animación
+OK   [escritorio-2560] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-2560] sin errores en consola
+OK   [escritorio-2560] sin solicitudes externas
+OK   [movil-390] sin desbordamiento horizontal — scrollWidth=390, ancho=390
+OK   [movil-390] áreas táctiles de al menos 44 × 44 px
+OK   [movil-390] sin texto recortado
+OK   [movil-390] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 60.2px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-390] CTA de portada completos y sin recortes — portada 686 px
+OK   [movil-390] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [movil-390] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [movil-390] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-390] todas las entradas terminan visibles
+OK   [movil-390] los precios terminan su animación
+OK   [movil-390] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-390] sin errores en consola
+OK   [movil-390] sin solicitudes externas
+OK   [movil-430] sin desbordamiento horizontal — scrollWidth=430, ancho=430
+OK   [movil-430] áreas táctiles de al menos 44 × 44 px
+OK   [movil-430] sin texto recortado
+OK   [movil-430] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 66.564px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-430] CTA de portada completos y sin recortes — portada 734 px
+OK   [movil-430] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [movil-430] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [movil-430] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-430] todas las entradas terminan visibles
+OK   [movil-430] los precios terminan su animación
+OK   [movil-430] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-430] sin errores en consola
+OK   [movil-430] sin solicitudes externas
+OK   [escritorio-1024] sin desbordamiento horizontal — scrollWidth=1024, ancho=1024
+OK   [escritorio-1024] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1024] sin texto recortado
+OK   [escritorio-1024] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 86.016px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1024] CTA de portada completos y sin recortes — portada 677 px
+OK   [escritorio-1024] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [escritorio-1024] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [escritorio-1024] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-1024] todas las entradas terminan visibles
+OK   [escritorio-1024] los precios terminan su animación
+OK   [escritorio-1024] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1024] sin errores en consola
+OK   [escritorio-1024] sin solicitudes externas
+OK   [escritorio-1280] sin desbordamiento horizontal — scrollWidth=1280, ancho=1280
+OK   [escritorio-1280] áreas táctiles de al menos 44 × 44 px
+OK   [escritorio-1280] sin texto recortado
+OK   [escritorio-1280] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 107.52px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [escritorio-1280] CTA de portada completos y sin recortes — portada 737 px
+OK   [escritorio-1280] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [escritorio-1280] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [escritorio-1280] imágenes con alt, dimensiones y carga correcta (5)
+OK   [escritorio-1280] todas las entradas terminan visibles
+OK   [escritorio-1280] los precios terminan su animación
+OK   [escritorio-1280] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [escritorio-1280] sin errores en consola
+OK   [escritorio-1280] sin solicitudes externas
+OK   [movil-horizontal-844x390] sin desbordamiento horizontal — scrollWidth=844, ancho=844
+OK   [movil-horizontal-844x390] áreas táctiles de al menos 44 × 44 px
+OK   [movil-horizontal-844x390] sin texto recortado
+OK   [movil-horizontal-844x390] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 58.5px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [movil-horizontal-844x390] CTA de portada completos y sin recortes — portada 425 px
+OK   [movil-horizontal-844x390] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [movil-horizontal-844x390] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [movil-horizontal-844x390] imágenes con alt, dimensiones y carga correcta (5)
+OK   [movil-horizontal-844x390] todas las entradas terminan visibles
+OK   [movil-horizontal-844x390] los precios terminan su animación
+OK   [movil-horizontal-844x390] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [movil-horizontal-844x390] sin errores en consola
+OK   [movil-horizontal-844x390] sin solicitudes externas
+OK   [zoom-200] sin desbordamiento horizontal — scrollWidth=720, ancho=720
+OK   [zoom-200] áreas táctiles de al menos 44 × 44 px
+OK   [zoom-200] sin texto recortado
+OK   [zoom-200] título en tres líneas («Bienestar» / «que se integra» / «a tu día») — 63.1858px, líneas 1/1/1, «Bienestar que se integra a tu día»
+OK   [zoom-200] CTA de portada completos y sin recortes — portada 439 px
+OK   [zoom-200] portada: título, texto, CTA y control dentro y sin solaparse
+OK   [zoom-200] portada: contenido opaco y video como capa absoluta — {"opacidad":[],"video":"absolute"}
+OK   [zoom-200] imágenes con alt, dimensiones y carga correcta (5)
+OK   [zoom-200] todas las entradas terminan visibles
+OK   [zoom-200] los precios terminan su animación
+OK   [zoom-200] la línea de la rutina se dibuja — {"drawn":true,"transform":"none"}
+OK   [zoom-200] sin errores en consola
+OK   [zoom-200] sin solicitudes externas
+OK   anclas internas válidas (12)
+OK   WhatsApp «WhatsApp» — sin mensaje precargado
+OK   WhatsApp «Pedir por WhatsApp →: DetoxPlus» en #detox — mensaje: "Hola, quiero pedir DetoxPlus ($70.000 COP)"
+OK   WhatsApp «Pedir por WhatsApp →: ColagenPlus» en #colagen — mensaje: "Hola, quiero pedir ColagenPlus ($130.000 COP)"
+OK   WhatsApp «Escríbenos por WhatsApp» — sin mensaje precargado
+OK   WhatsApp «WhatsApp +57 312 447 5525» — sin mensaje precargado
+OK   enlaces de Instagram — https://instagram.com/natures_wayco, https://instagram.com/natures_wayco
+OK   DetoxPlus: nombre, precio y envase corresponden — DetoxPlus | $70.000 | /media/detox-jar-820.png
+OK   ColagenPlus: nombre, precio y envase corresponden — ColagenPlus | $130.000 | /media/colagen-jar-1010.png
+OK   DetoxPlus aparece antes que ColagenPlus — detox, colagen
+OK   un solo h1
+     títulos: H1:Bienestar que se integra a tu día / H2:Nuestrosproductos / H3:DetoxPlus / H3:ColagenPlus / H2:Tu rutina / H3:Tenlo a la vista / H3:Súmalo a algo que ya haces / H3:Elige el que va contigo / H2:Nuestraesencia / H2:Preguntasfrecuentes / H2:¿Hablamos?
+OK   [movil-375] primer Tab: enlace para saltar al contenido
+OK   [movil-375] foco visible en 23 paradas de Tab
+OK   [movil-375] el elemento enfocado queda en pantalla
+OK   [movil-375] el video no recibe foco
+     orden de foco: Saltar al contenido → Nature’s Wayco, ir al inicio → Menú → WhatsApp → Conoce DetoxPlus → Ver productos → Pausar video → Pedir por WhatsApp →: DetoxPlus → Pedir por WhatsApp →: ColagenPlus → ¿Cómo hago un pedido?+ → ¿Cómo sé si hay envío a mi ciudad y si e → ¿Qué productos tienen?+ …
+OK   [movil-375] Enter en «Preguntas» lleva a la sección — top=76
+OK   [movil-375] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":164}
+OK   [escritorio-1440] primer Tab: enlace para saltar al contenido
+OK   [escritorio-1440] foco visible en 26 paradas de Tab
+OK   [escritorio-1440] el elemento enfocado queda en pantalla
+OK   [escritorio-1440] el video no recibe foco
+OK   [escritorio-1440] Enter en «Preguntas» lleva a la sección — top=80
+OK   [escritorio-1440] pregunta frecuente se abre con teclado y cierra la anterior — {"first":"false","second":"true","h":82}
+OK   [movil-320] menú móvil: abre con teclado, recorre enlaces y cierra con Escape devolviendo el foco — {"barra":"69 px","abierto":"true","primerEnlace":"Productos","trasEscape":{"expanded":"false","panel":"none","focus":"botón","navH":69}}
+OK   [movil-320] menú móvil: un enlace navega y cierra el menú — #rutina, false
+OK   [movil-320] menú móvil: se cierra al tocar fuera
+OK   [movil-375] menú móvil: abre con teclado, recorre enlaces y cierra con Escape devolviendo el foco — {"barra":"69 px","abierto":"true","primerEnlace":"Productos","trasEscape":{"expanded":"false","panel":"none","focus":"botón","navH":69}}
+OK   [movil-375] menú móvil: un enlace navega y cierra el menú — #rutina, false
+OK   [movil-375] menú móvil: se cierra al tocar fuera
+OK   [movil-375] sin saltos de diseño al cargar (CLS < 0,1) — CLS 0
+OK   [escritorio-1440] sin saltos de diseño al cargar (CLS < 0,1) — CLS 0
+OK   portada: video automático, en bucle, silenciado y en línea — avanzó 1.2 s en 1,2 s, 1024×576
+OK   portada: sin sonido (0 bytes de audio decodificados) — 0
+OK   portada móvil: video de fondo en su proporción (16:9), anclado abajo, recorte moderado (≥ 60 % del cuadro) y decorativo — {"fit":"cover","ratio":1.778,"visible":0.66,"poster":"portada-video-poster-1024.webp"}
+OK   portada: se pausa fuera de pantalla y reanuda al volver — {"away":true,"back":false}
+OK   portada: control de pausa (▶ / ❚❚), pausa manual respetada al volver — {"manual":{"paused":true,"label":"Reproducir video","icon":"▶"},"manualBack":true,"resumed":{"paused":false,"label":"Pausar video","icon":"❚❚"}}
+OK   portada: se pausa con la pestaña oculta y reanuda al volver — {"hiddenPaused":true,"visiblePlaying":true}
+OK   portada: «Conoce DetoxPlus» lleva a #detox — #detox
+OK   portada: «Ver productos» lleva a #productos — #productos
+OK   portada: sin errores en consola
+OK   portada: si el video falla quedan el fondo y el texto, sin errores — {"label":"Reproducir video","title":"1","errores":0}
+OK   movimiento reducido: sin entradas, cinta ni paralaje; línea completa; video en pausa con su póster — {"paused":true,"autoplay":false,"label":"Reproducir video","entradasOcultas":0,"cinta":"none","linea":"none","motion":"off"}
+OK   movimiento reducido: el video se reproduce solo al pedirlo — {"paused":false,"label":"Pausar video"}
+OK   [movil-320] contraste del texto de portada en 8 cuadros del clip — titular 12.92:1 en 0.1 s (mín. 3), «integra» 8.02:1 en 0.1 s (mín. 3), «día» 6.9:1 en 0.1 s (mín. 3), texto 10.05:1 en 0.1 s (mín. 4.5), «Ver productos» 6.8:1 en 2.8 s (mín. 4.5)
+OK   [movil-375] contraste del texto de portada en 8 cuadros del clip — titular 12.59:1 en 0.1 s (mín. 3), «integra» 7.99:1 en 0.1 s (mín. 3), «día» 6.89:1 en 0.1 s (mín. 3), texto 10.03:1 en 0.1 s (mín. 4.5), «Ver productos» 7.14:1 en 2.8 s (mín. 4.5)
+OK   [tableta-768] contraste del texto de portada en 8 cuadros del clip — titular 11.84:1 en 0.1 s (mín. 3), «integra» 7.88:1 en 0.1 s (mín. 3), «día» 6.71:1 en 0.1 s (mín. 3), texto 10.09:1 en 0.1 s (mín. 4.5), «Ver productos» 8.12:1 en 1.9 s (mín. 4.5)
+OK   [escritorio-1440] contraste del texto de portada en 3 cuadros del clip — titular 8.24:1 en 3.3 s (mín. 3), texto 5.12:1 en 3.3 s (mín. 4.5)
+OK   [escritorio-2560] contraste del texto de portada en 3 cuadros del clip — titular 5.6:1 en 6.3 s (mín. 3), texto 4.97:1 en 3.3 s (mín. 4.5)
+OK   [movil-390] contraste del texto de portada en 8 cuadros del clip — titular 12.59:1 en 0.1 s (mín. 3), «integra» 7.99:1 en 0.1 s (mín. 3), «día» 6.89:1 en 0.1 s (mín. 3), texto 9.94:1 en 0.1 s (mín. 4.5), «Ver productos» 7.28:1 en 2.8 s (mín. 4.5)
+OK   [movil-430] contraste del texto de portada en 8 cuadros del clip — titular 12.4:1 en 0.1 s (mín. 3), «integra» 7.99:1 en 0.1 s (mín. 3), «día» 6.81:1 en 0.1 s (mín. 3), texto 9.93:1 en 0.1 s (mín. 4.5), «Ver productos» 7.5:1 en 2.8 s (mín. 4.5)
+OK   [movil-horizontal-844x390] contraste del texto de portada en 8 cuadros del clip — titular 8.3:1 en 2.8 s (mín. 3), «integra» 7.64:1 en 3.7 s (mín. 3), «día» 7.22:1 en 0.1 s (mín. 3), texto 9.77:1 en 6.3 s (mín. 4.5), «Ver productos» 12.98:1 en 0.1 s (mín. 4.5)
+OK   [zoom-200] contraste del texto de portada en 8 cuadros del clip — titular 8.05:1 en 2.8 s (mín. 3), «integra» 5.98:1 en 1.9 s (mín. 3), «día» 6.92:1 en 4.6 s (mín. 3), texto 8.13:1 en 4.6 s (mín. 4.5), «Ver productos» 13.22:1 en 0.1 s (mín. 4.5)
+OK   [movil-320] barra y portada con el mismo verde, sin corte — {"barra":[14,40,27],"portada":[13,40,26],"portadaDerecha":[13,40,26]}
+OK   [movil-320] la portada termina en el verde de la cinta, también en la cuña inclinada — {"bordeIzquierdo":[30,45,35],"bordeCentro":[30,45,35],"cuña":[28,43,34]}
+OK   [movil-320] barra opaca al desplazarse y menú abierto con contraste — barra rgb(14, 40, 27), enlaces del menú 14.56:1, botón «Menú» 14.56:1
+OK   [movil-375] barra y portada con el mismo verde, sin corte — {"barra":[14,40,27],"portada":[15,41,27],"portadaDerecha":[15,41,28]}
+OK   [movil-375] la portada termina en el verde de la cinta, también en la cuña inclinada — {"bordeIzquierdo":[30,45,35],"bordeCentro":[30,45,35],"cuña":[28,43,34]}
+OK   [movil-375] barra opaca al desplazarse y menú abierto con contraste — barra rgb(14, 40, 27), enlaces del menú 14.56:1, botón «Menú» 14.56:1
+OK   [movil-390] barra y portada con el mismo verde, sin corte — {"barra":[14,40,27],"portada":[15,41,27],"portadaDerecha":[15,41,28]}
+OK   [movil-390] la portada termina en el verde de la cinta, también en la cuña inclinada — {"bordeIzquierdo":[30,45,35],"bordeCentro":[30,45,35],"cuña":[28,43,34]}
+OK   [movil-390] barra opaca al desplazarse y menú abierto con contraste — barra rgb(14, 40, 27), enlaces del menú 14.56:1, botón «Menú» 14.56:1
+OK   [movil-430] barra y portada con el mismo verde, sin corte — {"barra":[14,40,27],"portada":[15,41,27],"portadaDerecha":[15,41,28]}
+OK   [movil-430] la portada termina en el verde de la cinta, también en la cuña inclinada — {"bordeIzquierdo":[30,45,35],"bordeCentro":[30,45,35],"cuña":[28,43,34]}
+OK   [movil-430] barra opaca al desplazarse y menú abierto con contraste — barra rgb(14, 40, 27), enlaces del menú 14.56:1, botón «Menú» 14.56:1
+
+207/207 verificaciones correctas
