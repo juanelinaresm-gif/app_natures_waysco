@@ -1,0 +1,70 @@
+/* Barra «¿Dudas? Te ayudamos» de la vista móvil del diseño. */
+.wa-bar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #1c2b22;
+  border-radius: 999px;
+  padding: 6px 6px 6px 20px;
+  box-shadow: 0 12px 32px rgba(28, 43, 34, 0.28);
+  transform: translateY(calc(140% + env(safe-area-inset-bottom)));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wa-bar.is-shown {
+  transform: none;
+}
+
+.wa-bar__text {
+  color: #faf6ee;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.wa-bar__link {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: #9bcb3f;
+  color: #1c2b22;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.wa-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0e5e75;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wa-bar__link:hover {
+    color: #1c2b22;
+    background: #b2dd57;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-bar {
+    transition: none;
+  }
+}
+
+/* Solo en móvil: en escritorio la barra superior ya muestra WhatsApp. */
+@media (min-width: 768px) {
+  .wa-bar {
+    display: none;
+  }
+}

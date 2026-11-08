@@ -6,9 +6,11 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-// Portada del diseño. Escritorio (≥ 960 px): video de fondo a sangre con los degradados del diseño
-// y el texto encima. Móvil y tableta: el video también es el fondo, anclado abajo con el tarro a la
-// vista, bajo un degradado verde oscuro que sostiene el texto claro. Control de pausa.
+// Portada del diseño. En todos los tamaños el video es el fondo a sangre y el texto va encima.
+// Escritorio (≥ 960 px): degradado horizontal. Móvil y tableta: vista móvil del
+// diseño, con degradado vertical, título en tres líneas a todo el ancho, texto corto y el video en
+// la mitad inferior.
+// Control de pausa solo en escritorio; en móvil el video queda en bucle, como en el diseño.
 // Además del diseño: se pausa fuera de pantalla o con la pestaña oculta (y respeta la pausa manual
 // al volver) y, con movimiento reducido, no se reproduce sola: queda el póster (su primer cuadro).
 export function Hero() {
@@ -58,8 +60,8 @@ export function Hero() {
     <header id="top" className="hero" aria-labelledby="hero-title">
       <div className="hero__inner">
         <div className="hero__text">
-          {/* Un solo h1; cada línea es un bloque. Los espacios entre bloques mantienen el texto
-              continuo para lectores de pantalla y al copiar. */}
+          {/* Un solo h1 en tres líneas en todos los tamaños; cada línea es un bloque. Los espacios
+              entre bloques mantienen el texto continuo para lectores de pantalla y al copiar. */}
           <h1 id="hero-title" className="hero__title">
             <span className="hero__line">
               <span data-r="up" data-d="0">
@@ -83,7 +85,7 @@ export function Hero() {
               base de manzana verde, y ColagenPlus, con colágeno hidrolizado y resveratrol.
             </span>
             <span className="hero__lead-mobile">
-              Descubre DetoxPlus y ColagenPlus: dos mezclas para acompañar tu rutina de bienestar.
+              Dos mezclas en polvo para preparar bebidas en casa.
             </span>
           </p>
           <div className="hero__actions" data-r="fade" data-d="220">
@@ -97,11 +99,6 @@ export function Hero() {
         </div>
         {/* Fondo de la portada en todos los tamaños; capa absoluta detrás del texto. */}
         <div className="hero__visual">
-          <div
-            className="hero__backdrop"
-            aria-hidden="true"
-            style={{ backgroundImage: `url(${heroVideo.backdrop})` }}
-          />
           <div className="hero__media">
             <video
               ref={videoRef}
@@ -124,7 +121,6 @@ export function Hero() {
           </div>
           <div className="hero__fade-x" aria-hidden="true" />
           <div className="hero__fade-y" aria-hidden="true" />
-          <div className="hero__shade" aria-hidden="true" />
           <button
             type="button"
             className="hero__toggle"

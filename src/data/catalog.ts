@@ -44,7 +44,7 @@ export const products: Product[] = [
     id: 'colagenplus',
     anchor: 'colagen',
     name: 'ColagenPlus',
-    priceCOP: 130000,
+    priceCOP: 103000,
     netWeight: '1.000 g',
     servings: 50,
     summary:

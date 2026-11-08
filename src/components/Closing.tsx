@@ -3,7 +3,7 @@ import { instagram } from '../data/contact'
 import './Closing.css'
 
 export function Closing() {
-  const contact = getContactAction()
+  const contact = getContactAction('contact')
   return (
     <section className="hablamos" aria-labelledby="hablamos-title">
       <div className="hablamos__inner">

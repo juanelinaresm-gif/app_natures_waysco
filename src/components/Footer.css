@@ -3,6 +3,13 @@
   padding: clamp(56px, 8vw, 80px) var(--pad-x) calc(48px + env(safe-area-inset-bottom));
 }
 
+/* Móvil: espacio para que la barra flotante de WhatsApp no tape el final del pie. */
+@media (max-width: 767px) {
+  .footer {
+    padding-bottom: calc(124px + env(safe-area-inset-bottom));
+  }
+}
+
 .footer__inner {
   max-width: 1240px;
   margin: 0 auto;

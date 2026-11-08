@@ -12,7 +12,7 @@ import { formatPrice } from '../src/lib/format'
 describe('precios', () => {
   it('formatea en pesos colombianos', () => {
     expect(formatPrice(70000)).toBe('$70.000 COP')
-    expect(formatPrice(130000)).toBe('$130.000 COP')
+    expect(formatPrice(103000)).toBe('$103.000 COP')
   })
 })
 
@@ -28,7 +28,7 @@ describe('catálogo', () => {
     const detox = getProduct('detoxplus')
     expect([detox.priceCOP, detox.netWeight, detox.servings]).toEqual([70000, '600 g', 30])
     const colagen = getProduct('colagenplus')
-    expect([colagen.priceCOP, colagen.netWeight, colagen.servings]).toEqual([130000, '1.000 g', 50])
+    expect([colagen.priceCOP, colagen.netWeight, colagen.servings]).toEqual([103000, '1.000 g', 50])
   })
 
   it('usa el envase de cada producto y no el del otro', () => {
@@ -38,23 +38,38 @@ describe('catálogo', () => {
 })
 
 describe('enlaces de WhatsApp', () => {
-  it('cada producto abre el número configurado con su nombre y precio, como en el diseño', () => {
+  const wa = (text: string) => `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(text)}`
+
+  it('cada producto precarga su pedido con el precio del catálogo', () => {
     expect(getOrderAction(getProduct('detoxplus')).href).toBe(
-      'https://wa.me/573124475525?text=Hola%2C%20quiero%20pedir%20DetoxPlus%20(%2470.000%20COP)',
+      'https://wa.me/573124475525?text=Hola%2C%20quiero%20pedir%20DetoxPlus%20(%2470.000%20COP).%20%C2%BFMe%20confirman%20disponibilidad%20y%20env%C3%ADo%3F',
     )
     expect(getOrderAction(getProduct('colagenplus')).href).toBe(
-      'https://wa.me/573124475525?text=Hola%2C%20quiero%20pedir%20ColagenPlus%20(%24130.000%20COP)',
+      'https://wa.me/573124475525?text=Hola%2C%20quiero%20pedir%20ColagenPlus%20(%24103.000%20COP).%20%C2%BFMe%20confirman%20disponibilidad%20y%20env%C3%ADo%3F',
     )
+  })
+
+  it('el mensaje de pedido usa el mismo precio que se muestra', () => {
+    for (const p of products) {
+      const text = new URL(getOrderAction(p).href).searchParams.get('text')
+      expect(text).toContain(formatPrice(p.priceCOP))
+    }
+  })
+
+  it('cada acceso general precarga el mensaje de su lugar', () => {
+    expect(getContactAction('header').href).toBe(wa('Hola, me gustaría conocer más sobre los productos de Nature’s Wayco.'))
+    expect(getContactAction('contact').href).toBe(
+      wa('Hola, me gustaría recibir orientación para elegir entre DetoxPlus y ColagenPlus.'),
+    )
+    expect(getContactAction('general').href).toBe(wa('Hola, me gustaría recibir información sobre Nature’s Wayco.'))
+    expect(getContactAction().href).toBe(getContactAction('general').href)
   })
 
   it('codifica el mensaje completo', () => {
     expect(whatsappUrl('¿Hay envío? $70.000 & más', '570000000000')).toBe(
       'https://wa.me/570000000000?text=%C2%BFHay%20env%C3%ADo%3F%20%2470.000%20%26%20m%C3%A1s',
     )
-  })
-
-  it('el contacto general abre el chat sin mensaje', () => {
-    expect(getContactAction().href).toBe(`https://wa.me/${whatsapp.number}`)
+    expect(getContactAction('header').href).toContain('Nature%E2%80%99s%20Wayco.')
   })
 })
 

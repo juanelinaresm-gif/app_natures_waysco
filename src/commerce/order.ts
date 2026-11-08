@@ -4,7 +4,7 @@
 // con su etiqueta; no saben que hoy el canal es WhatsApp. Cuando exista tienda
 // Shopify, este es el único módulo que cambia (ver docs/shopify.md).
 import type { Product } from '../data/catalog'
-import { productMessage, whatsappUrl } from './whatsapp'
+import { contactMessage, productMessage, whatsappUrl, type ContactContext } from './whatsapp'
 
 export interface OrderAction {
   href: string
@@ -21,7 +21,7 @@ export function getOrderAction(product: Product): OrderAction {
   }
 }
 
-/** Contacto general: abre el chat sin mensaje precargado, como en el diseño. */
-export function getContactAction(label = 'Escríbenos por WhatsApp'): OrderAction {
-  return { href: whatsappUrl(), label, external: true }
+/** Contacto general: abre el chat con el mensaje del lugar desde donde se escribe. */
+export function getContactAction(context: ContactContext = 'general', label = 'Escríbenos por WhatsApp'): OrderAction {
+  return { href: whatsappUrl(contactMessage(context)), label, external: true }
 }

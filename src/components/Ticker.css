@@ -4,6 +4,15 @@
   overflow-x: clip;
 }
 
+/* Móvil y tableta: la portada termina en el verde de la cinta. La cuña que deja la inclinación
+   sobre la cinta se pinta de ese verde, así la unión llega hasta el borde inclinado; la de abajo
+   sigue mostrando el fondo de la página. */
+@media (max-width: 959px) {
+  .ticker-band {
+    background: linear-gradient(#1c2b22 50%, transparent 50%);
+  }
+}
+
 .ticker {
   background: #1c2b22;
   color: #9bcb3f;

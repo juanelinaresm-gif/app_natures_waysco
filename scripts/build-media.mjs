@@ -198,16 +198,6 @@ function buildHeroVideo() {
   )
 }
 
-// Fondo de la portada móvil: la pared del primer cuadro (sin el tarro), reducida y difuminada.
-// Completa el alto del hero por encima del video sin repetir el producto.
-function buildHeroBackdrop() {
-  magick([
-    path.join(OUT, `${HERO_POSTER.out}-1024.webp`),
-    '-crop', '300x576+0+0', '+repage', '-resize', '96x', '-blur', '0x4', '-strip', '-quality', '70',
-    path.join(OUT, 'portada-video-fondo-96.webp'),
-  ])
-}
-
 function copyVideos() {
   fs.mkdirSync(path.join(OUT, 'video'), { recursive: true })
   // Sin recodificar: H.264/AAC con moov al inicio, ya apto para web.
@@ -221,17 +211,14 @@ if (process.argv.includes('--solo-recortes')) {
   buildHeroVideo()
   await extractFrames(HERO_FRAMES)
   buildPhotos([HERO_POSTER])
-  buildHeroBackdrop()
 } else if (process.argv.includes('--solo-diseno')) {
   buildDesignImages()
   buildHeroVideo()
   await extractFrames(HERO_FRAMES)
   buildPhotos([HERO_POSTER])
-  buildHeroBackdrop()
 } else {
   await extractFrames([...FRAMES, ...HERO_FRAMES])
   buildPhotos([...PHOTOS, HERO_POSTER])
-  buildHeroBackdrop()
   buildCutouts()
   buildDesignImages()
   buildLogo()

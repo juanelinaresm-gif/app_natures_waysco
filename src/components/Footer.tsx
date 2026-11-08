@@ -7,7 +7,7 @@ import './Footer.css'
 const year = new Date().getFullYear()
 
 export function Footer() {
-  const contact = getContactAction()
+  const contact = getContactAction('general')
   return (
     <footer className="footer">
       <div className="footer__inner">

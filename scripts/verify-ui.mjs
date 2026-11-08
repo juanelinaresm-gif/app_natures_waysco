@@ -2,8 +2,9 @@
 // Claude Design «Diseño dinámico Natures Wayco».
 //
 // Levanta `vite preview` sobre dist/ (ejecuta antes `npm run build`) y revisa: desbordamiento,
-// anclas, enlaces de WhatsApp (sin abrirlos), imágenes, correspondencia producto–precio–envase,
-// teclado, video de portada, movimiento (entradas, precio, línea) y movimiento reducido.
+// anclas y desplazamiento suave bajo la barra, enlaces de WhatsApp con su mensaje (sin abrirlos),
+// imágenes, correspondencia producto–precio–envase, teclado, video de portada, movimiento
+// (entradas, precio, línea) y movimiento reducido.
 // Guarda capturas en docs/reports/capturas/<CAPTURAS>/.
 //
 // Uso: npm run build && npm run verify
@@ -26,9 +27,17 @@ const EXPECTED = {
   number: '573124475525',
   instagram: 'https://instagram.com/natures_wayco',
   products: [
-    { id: 'detox', name: 'DetoxPlus', price: '$70.000', jar: 'detox-jar', text: 'Hola, quiero pedir DetoxPlus ($70.000 COP)' },
-    { id: 'colagen', name: 'ColagenPlus', price: '$130.000', jar: 'colagen-jar', text: 'Hola, quiero pedir ColagenPlus ($130.000 COP)' },
+    { id: 'detox', name: 'DetoxPlus', price: '$70.000', jar: 'detox-jar', text: 'Hola, quiero pedir DetoxPlus ($70.000 COP). ¿Me confirman disponibilidad y envío?' },
+    { id: 'colagen', name: 'ColagenPlus', price: '$103.000', jar: 'colagen-jar', text: 'Hola, quiero pedir ColagenPlus ($103.000 COP). ¿Me confirman disponibilidad y envío?' },
   ],
+  // Accesos generales a WhatsApp, por lugar de la página.
+  messages: {
+    barra: 'Hola, me gustaría conocer más sobre los productos de Nature’s Wayco.',
+    menú: 'Hola, me gustaría conocer más sobre los productos de Nature’s Wayco.',
+    flotante: 'Hola, me gustaría recibir información sobre Nature’s Wayco.',
+    contacto: 'Hola, me gustaría recibir orientación para elegir entre DetoxPlus y ColagenPlus.',
+    pie: 'Hola, me gustaría recibir información sobre Nature’s Wayco.',
+  },
 }
 
 // Los cinco primeros mantienen sus índices (se usan más abajo); el resto amplía la cobertura.
@@ -153,7 +162,7 @@ async function checkViewport(browser, vp) {
       .filter((el) => !hidden(el) && /(hidden|clip)/.test(getComputedStyle(el).overflowX) && el.scrollWidth > el.clientWidth + 1)
       .map((el) => el.textContent.trim().slice(0, 24))
     // Título: tres bloques, cada uno en una sola línea.
-    const lines = [...document.querySelectorAll('.hero__line')].map((l) => {
+    const lines = [...document.querySelectorAll('.hero__line')].filter((l) => l.getClientRects().length).map((l) => {
       const inner = l.firstElementChild
       const lh = parseFloat(getComputedStyle(inner).lineHeight)
       return Math.round(inner.getBoundingClientRect().height / lh)
@@ -171,7 +180,7 @@ async function checkViewport(browser, vp) {
       ['texto', rect('.hero__lead')],
       ...ctas.map((r, i) => [`CTA ${i + 1}`, r]),
       ['control', rect('.hero__toggle')],
-    ]
+    ].filter(([, r]) => r.width > 0)
     const meets = (a, b) => a.left < b.right - 0.5 && b.left < a.right - 0.5 && a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5
     const overlaps = []
     for (let i = 0; i < parts.length; i++)
@@ -190,7 +199,7 @@ async function checkViewport(browser, vp) {
       clipped,
       lines,
       fontSize: getComputedStyle(title).fontSize,
-      titleText: title.textContent.replace(/\s+/g, ' ').trim(),
+      titleText: title.innerText.replace(/\s+/g, ' ').trim(),
       ctasInside,
       heroH: Math.round(hero.height),
     }
@@ -232,6 +241,7 @@ async function checkViewport(browser, vp) {
   // Ningún elemento con entrada queda oculto tras recorrer la página.
   const stuck = await page.evaluate(() =>
     [...document.querySelectorAll('[data-r]')]
+      .filter((el) => el.getClientRects().length)
       .filter((el) => getComputedStyle(el).opacity !== '1' || el.style.transform !== 'none')
       .map((el) => el.textContent.trim().slice(0, 30)),
   )
@@ -292,25 +302,48 @@ async function checkContentAndLinks(browser) {
       text: a.textContent.trim().replace(/\s+/g, ' '),
       target: a.target,
       rel: a.rel,
-      section: a.closest('section')?.id ?? null,
+      place: a.closest('.nav')
+        ? 'barra'
+        : a.closest('.menu')
+          ? 'menú'
+          : a.closest('.wa-bar')
+            ? 'flotante'
+            : a.closest('.hablamos')
+              ? 'contacto'
+              : a.closest('footer')
+                ? 'pie'
+                : (a.closest('section')?.id ?? null),
     })),
+  )
+  check(
+    'siete accesos a WhatsApp (barra, menú móvil, barra flotante, dos productos, contacto y pie)',
+    wa.length === 7,
+    wa.map((l) => l.place).join(', '),
   )
   for (const link of wa) {
     const url = new URL(link.href)
     const text = url.searchParams.get('text')
     const okNumber = url.hostname === 'wa.me' && url.pathname === `/${EXPECTED.number}`
-    const product = EXPECTED.products.find((p) => p.id === link.section)
-    const okText = product
-      ? text === product.text && link.raw === `https://wa.me/${EXPECTED.number}?text=${encodeURIComponent(product.text)}`
-      : text === null
+    const product = EXPECTED.products.find((p) => p.id === link.place)
+    const expected = product ? product.text : EXPECTED.messages[link.place]
+    const okText = !!expected && text === expected && link.raw === `https://wa.me/${EXPECTED.number}?text=${encodeURIComponent(expected)}`
     check(
-      `WhatsApp «${link.text}»${product ? ` en #${product.id}` : ''}`,
+      `WhatsApp «${link.text}» en ${product ? `#${product.id}` : link.place}`,
       okNumber && okText && link.target === '_blank' && link.rel.includes('noopener'),
-      product ? `mensaje: "${text}"` : 'sin mensaje precargado',
+      `mensaje: "${text}"`,
     )
   }
+  // El precio de cada mensaje de pedido coincide con el visible en su ficha (misma fuente).
+  for (const p of EXPECTED.products) {
+    const shown = await page.locator(`#${p.id} .visually-hidden`).first().textContent()
+    const link = wa.find((l) => l.place === p.id)
+    const text = link ? new URL(link.href).searchParams.get('text') : ''
+    check(`${p.name}: el precio del mensaje es el de la ficha`, shown.includes(`${p.price} COP`) && text.includes(`(${p.price} COP)`), `ficha «${shown}»`)
+  }
+  const faq = await page.evaluate(() => document.querySelector('#preguntas').textContent)
+  check('preguntas frecuentes con los precios vigentes', faq.includes('$70.000 COP') && faq.includes('$103.000 COP') && !faq.includes('130.000'))
   const ig = await page.evaluate(() => [...document.querySelectorAll('a[href*="instagram"]')].map((a) => a.getAttribute('href')))
-  check('enlaces de Instagram', ig.length === 2 && ig.every((h) => h === EXPECTED.instagram), ig.join(', '))
+  check('enlaces de Instagram (contacto, pie y menú móvil)', ig.length === 3 && ig.every((h) => h === EXPECTED.instagram), ig.join(', '))
 
   for (const p of EXPECTED.products) {
     const info = await page.locator(`#${p.id}`).evaluate((el) => ({
@@ -351,6 +384,13 @@ async function checkKeyboard(browser) {
           label: (el.getAttribute('aria-label') || el.textContent || el.tagName).trim().replace(/\s+/g, ' ').slice(0, 40),
           outline: s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2,
           inViewport: r.bottom > 0 && r.top < window.innerHeight,
+          // Foco no tapado por la barra flotante de WhatsApp (salvo sus propios elementos).
+          covered: (() => {
+            const bar = document.querySelector('.wa-bar.is-shown')
+            if (!bar || bar.contains(el)) return false
+            const b = bar.getBoundingClientRect()
+            return r.bottom > b.top + 1 && r.top < b.bottom && r.right > b.left && r.left < b.right
+          })(),
           tag: el.tagName.toLowerCase(),
         }
       })
@@ -362,15 +402,19 @@ async function checkKeyboard(browser) {
     check(`[${vp.name}] foco visible en ${stops.length} paradas de Tab`, noOutline.length === 0, noOutline.map((s) => s.label).join(', '))
     const offscreen = stops.filter((s) => !s.inViewport)
     check(`[${vp.name}] el elemento enfocado queda en pantalla`, offscreen.length === 0, offscreen.map((s) => s.label).join(', '))
+    const covered = stops.filter((s) => s.covered)
+    check(`[${vp.name}] el foco no queda tapado por la barra flotante`, covered.length === 0, covered.map((s) => s.label).join(', '))
     check(`[${vp.name}] el video no recibe foco`, !stops.some((s) => s.tag === 'video'))
     if (vp.name === 'movil-375') console.log(`     orden de foco: ${stops.slice(0, 12).map((s) => s.label).join(' → ')} …`)
 
     await page.goto(URL_BASE, { waitUntil: 'networkidle' })
-    if (await page.locator('.nav__menu').isVisible()) {
+    const mobileMenu = await page.locator('.nav__menu').isVisible()
+    if (mobileMenu) {
       await page.locator('.nav__menu').focus()
       await page.keyboard.press('Enter')
+      await page.waitForTimeout(900)
     }
-    await page.locator('.nav__link[href="#preguntas"]').focus()
+    await page.locator(`${mobileMenu ? '.menu__link' : '.nav__link'}[href="#preguntas"]`).focus()
     await page.keyboard.press('Enter')
     await page.waitForTimeout(200)
     await waitScrollSettled(page)
@@ -398,6 +442,9 @@ async function checkKeyboard(browser) {
   }
 }
 
+// Menú móvil a pantalla completa, con teclado: el foco entra al abrir, Tab no sale del menú,
+// Escape lo cierra y devuelve el foco al botón, la página no se desplaza debajo y, cerrado, queda
+// inerte (fuera del foco y del árbol de accesibilidad).
 async function checkMobileMenu(browser) {
   for (const vp of [VIEWPORTS[0], VIEWPORTS[1]]) {
     const { context, page } = await newPage(browser, { ...vp, mobile: false })
@@ -405,40 +452,172 @@ async function checkMobileMenu(browser) {
     const state = () =>
       page.evaluate(() => {
         const b = document.querySelector('.nav__menu')
-        const panel = document.getElementById(b.getAttribute('aria-controls'))
+        const menu = document.getElementById(b.getAttribute('aria-controls'))
+        const a = document.activeElement
         return {
           expanded: b.getAttribute('aria-expanded'),
-          panel: getComputedStyle(panel).display,
-          focus: document.activeElement === b ? 'botón' : document.activeElement.textContent.trim().slice(0, 20),
+          inert: menu.inert,
+          dialog: `${menu.getAttribute('role')}/${menu.getAttribute('aria-modal')}`,
+          focus: a === b ? 'botón' : menu.contains(a) ? `menú: ${(a.getAttribute('aria-label') || a.textContent).trim().slice(0, 24)}` : a.tagName,
+          locked: getComputedStyle(document.documentElement).overflow === 'hidden',
           navH: Math.round(document.querySelector('.nav').getBoundingClientRect().height),
         }
       })
     const closed = await state()
     await page.locator('.nav__menu').focus()
     await page.keyboard.press('Enter')
+    await page.waitForTimeout(100)
     const opened = await state()
     await page.keyboard.press('Tab')
-    const firstLink = await page.evaluate(() => document.activeElement.textContent.trim())
+    const firstLink = (await state()).focus
+    await page.keyboard.press('Shift+Tab')
+    await page.keyboard.press('Shift+Tab')
+    const wrapped = (await state()).focus
+    await page.waitForTimeout(1300)
     await page.screenshot({ path: path.join(SHOTS, `${vp.name}-menu-abierto.png`) })
     await page.keyboard.press('Escape')
     const escaped = await state()
+    await page.waitForTimeout(900)
+    const settled = await state()
     check(
-      `[${vp.name}] menú móvil: abre con teclado, recorre enlaces y cierra con Escape devolviendo el foco`,
-      closed.expanded === 'false' && closed.panel === 'none' && opened.expanded === 'true' && opened.panel === 'flex' &&
-        firstLink === 'Productos' && escaped.expanded === 'false' && escaped.panel === 'none' && escaped.focus === 'botón',
-      JSON.stringify({ barra: `${closed.navH} px`, abierto: opened.expanded, primerEnlace: firstLink, trasEscape: escaped }),
+      `[${vp.name}] menú móvil: diálogo con foco dentro, Tab sin salir, Escape cierra y devuelve el foco; página fija mientras está abierto`,
+      closed.expanded === 'false' && closed.inert && opened.expanded === 'true' && !opened.inert && opened.dialog === 'dialog/true' &&
+        opened.focus === 'menú: Cerrar menú' && opened.locked && firstLink.includes('Productos') && wrapped.includes('Instagram') &&
+        escaped.expanded === 'false' && escaped.focus === 'botón' && !escaped.locked && settled.inert,
+      JSON.stringify({ barra: `${closed.navH} px`, abierto: opened, primerEnlace: firstLink, alVolver: wrapped, trasEscape: escaped.focus, inerte: settled.inert }),
     )
     await page.click('.nav__menu')
-    await page.click('.nav__link[href="#rutina"]')
+    await page.waitForTimeout(1300)
+    await page.click('.menu__link[href="#rutina"]')
     await page.waitForTimeout(300)
     await waitScrollSettled(page)
     const after = await state()
     const hash = await page.evaluate(() => location.hash)
-    check(`[${vp.name}] menú móvil: un enlace navega y cierra el menú`, hash === '#rutina' && after.expanded === 'false', `${hash}, ${after.expanded}`)
-    await page.click('.nav__menu')
-    await page.mouse.click(vp.width / 2, vp.height - 40)
-    const outside = await state()
-    check(`[${vp.name}] menú móvil: se cierra al tocar fuera`, outside.expanded === 'false')
+    check(
+      `[${vp.name}] menú móvil: un enlace cierra el menú, libera la página y navega`,
+      hash === '#rutina' && after.expanded === 'false' && !after.locked,
+      `${hash}, ${after.expanded}`,
+    )
+    await context.close()
+  }
+}
+
+// Navegación interna (barra, menú móvil, portada, pie y logo). Se registra scrollY en cada cuadro
+// desde el clic: con movimiento normal debe haber varios cuadros intermedios (desplazamiento suave)
+// y con movimiento reducido el primer cuadro ya está en el destino. Al terminar: hash actualizado,
+// la sección empieza justo bajo la barra y su título queda visible. En móvil, el menú está cerrado
+// desde el primer cuadro y ni la barra ni la página cambian de alto (sin saltos).
+async function checkSmoothScroll(browser, reduced = false) {
+  const tag = reduced ? 'movimiento reducido' : 'navegación suave'
+  const viewports = reduced ? [VIEWPORTS[1], VIEWPORTS[3]] : [VIEWPORTS[0], VIEWPORTS[1], VIEWPORTS[2], VIEWPORTS[3]]
+  for (const vp of viewports) {
+    const { context, page, errors } = await newPage(browser, vp, reduced ? { reducedMotion: 'reduce' } : {})
+    await page.goto(URL_BASE, { waitUntil: 'networkidle' })
+    await page.waitForTimeout(600)
+    const behavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)
+    check(`[${vp.name}] ${tag}: scroll-behavior ${reduced ? 'auto' : 'smooth'}`, behavior === (reduced ? 'auto' : 'smooth'), behavior)
+    const menu = await page.locator('.nav__menu').isVisible()
+    const ids = ['#productos', '#rutina', '#esencia', '#preguntas']
+    const cases = [
+      ...ids.map((href) => ({
+        group: menu ? 'menú' : 'barra',
+        from: 'top',
+        sel: `${menu ? '.menu__link' : '.nav__link'}[href="${href}"]`,
+        href,
+        openMenu: menu,
+      })),
+      { group: 'portada', from: 'top', sel: '.hero__cta', href: '#detox' },
+      { group: 'portada', from: 'top', sel: '.hero__ghost', href: '#productos' },
+      ...ids.map((href) => ({ group: 'pie', from: 'end', sel: `.footer__link[href="${href}"]`, href })),
+      { group: 'logo', from: 'mid', sel: '.nav__logo', href: '#top' },
+    ]
+    const bad = []
+    let frames = []
+    for (const c of reduced ? cases.filter((_, i) => i === 0 || i === 4 || i === 9) : cases) {
+      await page.evaluate((from) => {
+        const max = document.documentElement.scrollHeight - innerHeight
+        window.scrollTo({ top: from === 'end' ? max : from === 'mid' ? max / 2 : 0, behavior: 'instant' })
+      }, c.from)
+      await page.waitForTimeout(300)
+      if (c.openMenu) {
+        await page.click('.nav__menu')
+        await page.waitForTimeout(reduced ? 200 : 1300)
+      }
+      await page.evaluate(() => {
+        const s = (window.__frames = [])
+        const btn = document.querySelector('.nav__menu')
+        const mobileMenu = getComputedStyle(btn).display !== 'none'
+        const nav = document.querySelector('.nav')
+        const tick = (t0) => () => {
+          s.push({
+            y: Math.round(scrollY),
+            open: mobileMenu && btn.getAttribute('aria-expanded') === 'true',
+            navH: Math.round(nav.getBoundingClientRect().height),
+            docH: document.documentElement.scrollHeight,
+          })
+          if (performance.now() - t0 < 2500) requestAnimationFrame(tick(t0))
+        }
+        // Fase de captura: corre antes que React y antes de que el navegador siga el enlace.
+        document.addEventListener('click', () => {
+          window.__startY = Math.round(scrollY)
+          requestAnimationFrame(tick(performance.now()))
+        }, { once: true, capture: true })
+      })
+      if (vp.mobile) await page.tap(c.sel)
+      else await page.click(c.sel)
+      await page.waitForTimeout(400)
+      await waitScrollSettled(page)
+      await page.waitForTimeout(2200)
+      const r = await page.evaluate((href) => {
+        const t = document.getElementById(href.slice(1))
+        const nav = document.querySelector('.nav').getBoundingClientRect()
+        const h = t.querySelector('h1, h2, h3').getBoundingClientRect()
+        const max = document.documentElement.scrollHeight - innerHeight
+        return {
+          hash: location.hash,
+          top: Math.round(t.getBoundingClientRect().top),
+          navBottom: Math.round(nav.bottom),
+          headTop: Math.round(h.top),
+          atEnd: Math.abs(scrollY - max) < 2,
+          vh: innerHeight,
+          start: window.__startY,
+          end: Math.round(scrollY),
+          frames: window.__frames,
+        }
+      }, c.href)
+      const ys = r.frames.map((f) => f.y)
+      const between = new Set(ys.filter((y) => y !== r.start && y !== r.end)).size
+      const problems = []
+      if (r.hash !== c.href) problems.push(`hash ${r.hash}`)
+      if (!(Math.abs(r.top - r.navBottom) <= 2 || (r.atEnd && r.top >= r.navBottom - 2))) problems.push(`sección a ${r.top - r.navBottom} px de la barra`)
+      if (!(r.headTop >= r.navBottom - 1 && r.headTop < r.vh)) problems.push(`título en ${r.headTop} (barra ${r.navBottom})`)
+      if (r.start === r.end) problems.push('no se desplazó')
+      else if (reduced ? ys[0] !== r.end : between < 4) problems.push(reduced ? `primer cuadro en ${ys[0]}, destino ${r.end}` : `solo ${between} cuadros intermedios`)
+      if (c.openMenu) {
+        if (r.frames.some((f) => f.open)) problems.push('menú abierto durante el desplazamiento')
+        if (new Set(r.frames.map((f) => `${f.navH}/${f.docH}`)).size > 1) problems.push('cambió el alto de la barra o de la página')
+      }
+      if (problems.length) bad.push(`${c.group} ${c.href}: ${problems.join(', ')}`)
+      if (c.group === 'portada' && c.href === '#detox') frames = ys
+      if (!reduced && ['menú', 'barra'].includes(c.group) && ['movil-375', 'escritorio-1440'].includes(vp.name)) {
+        await page.screenshot({ path: path.join(SHOTS, `${vp.name}-ancla-${c.href.slice(1)}.png`) })
+      }
+    }
+    check(
+      `[${vp.name}] ${tag}: ${menu ? 'menú' : 'barra'}, portada, pie y logo llegan a su sección con el título visible bajo la barra`,
+      bad.length === 0,
+      bad.length ? bad.join(' | ') : `«Conoce DetoxPlus»: ${frames.length} cuadros, ${frames[0]} → ${frames.at(-1)} px`,
+    )
+    if (!reduced && vp === VIEWPORTS[3]) {
+      // El scroll manual no se intercepta: la rueda desplaza la página.
+      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+      await page.mouse.move(vp.width / 2, vp.height / 2)
+      await page.mouse.wheel(0, 700)
+      await page.waitForTimeout(800)
+      const y = await page.evaluate(() => scrollY)
+      check(`[${vp.name}] el scroll manual con la rueda sigue funcionando`, y > 500, `scrollY ${y}`)
+    }
+    check(`[${vp.name}] ${tag}: sin errores en consola`, errors.length === 0, errors.join(' | '))
     await context.close()
   }
 }
@@ -462,7 +641,7 @@ async function checkLayoutShift(browser) {
 }
 
 async function checkHeroVideo(browser) {
-  const { context, page, errors } = await newPage(browser, VIEWPORTS[1])
+  let { context, page, errors } = await newPage(browser, VIEWPORTS[1])
   await page.goto(URL_BASE, { waitUntil: 'networkidle' })
   const st = await page.evaluate(async () => {
     const v = document.querySelector('.hero__video')
@@ -482,9 +661,18 @@ async function checkHeroVideo(browser) {
       fit: s.objectFit,
       transform: s.transform,
       ratio: +(v.getBoundingClientRect().width / v.getBoundingClientRect().height).toFixed(3),
-      // Fracción del ancho del cuadro que queda a la vista y alineación con el borde inferior.
-      shown: +(document.querySelector('header#top').getBoundingClientRect().width / v.getBoundingClientRect().width).toFixed(2),
-      bottom: Math.abs(v.getBoundingClientRect().bottom - document.querySelector('header#top').getBoundingClientRect().bottom) < 1,
+      // La caja del video ocupa el 70 % inferior de la portada, a todo el ancho; fracción del
+      // ancho del cuadro que queda a la vista.
+      box: (() => {
+        const a = v.getBoundingClientRect()
+        const b = document.querySelector('header#top').getBoundingClientRect()
+        return {
+          bottom: ['left', 'right', 'bottom'].every((k) => Math.abs(a[k] - b[k]) < 1),
+          top: +((a.top - b.top) / b.height).toFixed(2),
+          shown: +(a.width / ((a.height * 16) / 9)).toFixed(2),
+        }
+      })(),
+      toggle: getComputedStyle(document.querySelector('.hero__toggle')).display,
       hidden: v.getAttribute('aria-hidden'),
       tabIndex: v.tabIndex,
       poster: v.poster.split('/').pop(),
@@ -497,11 +685,18 @@ async function checkHeroVideo(browser) {
   )
   check('portada: sin sonido (0 bytes de audio decodificados)', st.audioBytes === 0, String(st.audioBytes))
   check(
-    'portada móvil: video de fondo en su proporción (16:9), anclado abajo, recorte moderado (≥ 60 % del cuadro) y decorativo',
-    st.fit === 'cover' && st.transform === 'none' && Math.abs(st.ratio - 16 / 9) < 0.01 && st.shown >= 0.6 && st.bottom &&
+    'portada móvil: video de fondo en el 70 % inferior (cover, sin escala, ≥ 38 % del ancho del cuadro) y decorativo',
+    st.fit === 'cover' && st.transform === 'none' && st.box.bottom && st.box.top === 0.3 && st.box.shown >= 0.38 &&
       st.hidden === 'true' && st.tabIndex === -1,
-    JSON.stringify({ fit: st.fit, ratio: st.ratio, visible: st.shown, poster: st.poster }),
+    JSON.stringify({ fit: st.fit, ...st.box, poster: st.poster }),
   )
+  check('portada móvil: sin control de pausa, el video queda en bucle', st.toggle === 'none' && st.loop, `control ${st.toggle}`)
+
+  // El control de pausa solo existe en escritorio: el resto de pruebas del video se hacen ahí.
+  await context.close()
+  ;({ context, page, errors } = await newPage(browser, VIEWPORTS[3]))
+  await page.goto(URL_BASE, { waitUntil: 'networkidle' })
+  await page.waitForTimeout(800)
 
   const state = () =>
     page.evaluate(() => ({
@@ -608,15 +803,25 @@ async function checkReducedMotion(browser) {
       st.linea === 'none' && st.motion === 'off',
     JSON.stringify(st),
   )
-  await page.click('.hero__toggle')
-  await page.waitForTimeout(1200)
-  const after = await page.evaluate(() => ({
+  await page.screenshot({ path: path.join(SHOTS, 'movil-375-movimiento-reducido.png') })
+  await context.close()
+
+  // En escritorio, el control de pausa reproduce el video solo cuando se pide.
+  const desk = await newPage(browser, VIEWPORTS[3], { reducedMotion: 'reduce' })
+  await desk.page.goto(URL_BASE, { waitUntil: 'networkidle' })
+  await desk.page.waitForTimeout(800)
+  await desk.page.click('.hero__toggle')
+  await desk.page.waitForTimeout(1200)
+  const after = await desk.page.evaluate(() => ({
     paused: document.querySelector('.hero__video').paused,
     label: document.querySelector('.hero__toggle').getAttribute('aria-label'),
   }))
-  check('movimiento reducido: el video se reproduce solo al pedirlo', !after.paused && after.label === 'Pausar video', JSON.stringify(after))
-  await page.screenshot({ path: path.join(SHOTS, 'movil-375-movimiento-reducido.png') })
-  await context.close()
+  check(
+    '[escritorio-1440] movimiento reducido: el video se reproduce solo al pedirlo',
+    !after.paused && after.label === 'Pausar video',
+    JSON.stringify(after),
+  )
+  await desk.context.close()
 }
 
 // Contraste del texto de la portada sobre los píxeles reales (video + degradados), con el texto
@@ -640,14 +845,13 @@ async function checkHeroContrast(browser) {
           ['texto', '.hero__lead', 4.5],
         ]
   const hide = '.hero__title, .hero__lead, .hero__green, .hero__amber, .hero__ghost'
-  for (const vp of VIEWPORTS.filter((v) => [...MOBILE, 'escritorio-1440', 'escritorio-2560'].includes(v.name))) {
+  const DESKTOP = ['escritorio-1440', 'escritorio-2560']
+  for (const vp of VIEWPORTS.filter((v) => [...MOBILE, ...DESKTOP].includes(v.name))) {
     const { context, page } = await newPage(browser, { ...vp, mobile: false }, { deviceScaleFactor: 1 })
     await page.goto(URL_BASE, { waitUntil: 'networkidle' })
     await page.waitForTimeout(1500)
     const duration = await page.evaluate(() => document.querySelector('.hero__video').duration)
-    const times = MOBILE.includes(vp.name)
-      ? Array.from({ length: 8 }, (_, i) => +(0.1 + ((duration - 0.25) * i) / 7).toFixed(2))
-      : [0.1, duration / 2, duration - 0.15]
+    const times = Array.from({ length: 8 }, (_, i) => +(0.1 + ((duration - 0.25) * i) / 7).toFixed(2))
     const worst = {}
     for (const t of times) {
       await page.evaluate(async (time) => {
@@ -713,6 +917,173 @@ async function checkHeroContrast(browser) {
   }
 }
 
+// Vista móvil: barra flotante «¿Dudas? Te ayudamos» (oculta arriba e inerte, aparece al bajar más
+// de un 55 % de la pantalla, se oculta con el menú abierto) y animación del menú (círculo que crece
+// desde la esquina y enlaces que suben). Con movimiento reducido, ambos cambian sin transición.
+// En escritorio no existen.
+async function checkMobileExtras(browser, reduced = false) {
+  const tag = reduced ? 'movimiento reducido' : 'vista móvil'
+  const { context, page } = await newPage(browser, VIEWPORTS[1], reduced ? { reducedMotion: 'reduce' } : {})
+  await page.goto(URL_BASE, { waitUntil: 'networkidle' })
+  await page.waitForTimeout(600)
+  const bar = () =>
+    page.evaluate(() => {
+      const el = document.querySelector('.wa-bar')
+      const r = el.getBoundingClientRect()
+      return {
+        shown: el.classList.contains('is-shown'),
+        inert: el.inert,
+        onScreen: r.top < innerHeight && r.bottom <= innerHeight - 11,
+        text: new URL(el.querySelector('a').href).searchParams.get('text'),
+        duration: getComputedStyle(el).transitionDuration,
+      }
+    })
+  const top = await bar()
+  await page.evaluate(() => window.scrollTo({ top: innerHeight * 0.7, behavior: 'instant' }))
+  await page.waitForTimeout(900)
+  const down = await bar()
+  if (!reduced) await page.screenshot({ path: path.join(SHOTS, 'movil-375-barra-flotante.png') })
+  await page.tap('.nav__menu')
+  await page.waitForTimeout(100)
+  const withMenu = await bar()
+  check(
+    `[movil-375] ${tag}: barra flotante oculta arriba, visible al bajar, oculta con el menú abierto`,
+    !top.shown && top.inert && !top.onScreen && down.shown && !down.inert && down.onScreen && !withMenu.shown && withMenu.inert &&
+      down.text === EXPECTED.messages.flotante && (reduced ? parseFloat(top.duration) < 0.01 : top.duration === '0.5s'),
+    JSON.stringify({ arriba: top.shown, alBajar: down.shown, conMenu: withMenu.shown, transición: top.duration, mensaje: down.text }),
+  )
+  const menu = () =>
+    page.evaluate(() => {
+      const m = document.querySelector('.menu')
+      const radius = parseFloat(getComputedStyle(m).clipPath.match(/circle\(([\d.]+)%/)?.[1] ?? 'NaN')
+      return { radius, link: getComputedStyle(m.querySelector('.menu__link')).transform }
+    })
+  const align = await page.evaluate(() => {
+    const c = (el) => {
+      const r = el.getBoundingClientRect()
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width }
+    }
+    const a = c(document.querySelector('.nav__menu'))
+    const b = c(document.querySelector('.menu__close'))
+    // Origen del círculo: «calc(100% - Npx) Ypx» o «Xpx Ypx», según cómo lo devuelva el navegador.
+    const clip = getComputedStyle(document.querySelector('.menu')).clipPath
+    const m = clip.match(/at (?:calc\(100% - ([\d.]+)px\)|([\d.]+)px) ([\d.]+)px/)
+    const ox = m ? (m[1] ? innerWidth - +m[1] : +m[2]) : NaN
+    return {
+      same: Math.abs(a.x - b.x) < 1 && Math.abs(a.y - b.y) < 1 && Math.abs(a.w - b.w) < 1,
+      origin: !!m && Math.abs(ox - a.x) < 1 && Math.abs(+m[3] - a.y) < 1,
+      boton: a,
+      cerrar: b,
+      clip: getComputedStyle(document.querySelector('.menu')).clipPath,
+    }
+  })
+  const early = await menu()
+  if (!reduced) await page.screenshot({ path: path.join(SHOTS, 'movil-375-menu-animando.png') })
+  await page.waitForTimeout(1500)
+  const done = await menu()
+  check(
+    `[movil-375] ${tag}: «Cerrar» ocupa el lugar y el tamaño del botón del menú y el círculo nace de su centro`,
+    align.same && align.origin,
+    JSON.stringify(align),
+  )
+  check(
+    `[movil-375] ${tag}: ${reduced ? 'el menú se abre sin animación' : 'el menú se abre en círculo y los enlaces suben'}`,
+    reduced
+      ? early.radius === 150 && early.link === 'none'
+      : early.radius > 0 && early.radius < 150 && early.link !== 'none' && done.radius === 150 && done.link === 'none',
+    JSON.stringify({ alInicio: early, alTerminar: done }),
+  )
+  await context.close()
+
+  if (!reduced) {
+    const desk = await newPage(browser, VIEWPORTS[3])
+    await desk.page.goto(URL_BASE, { waitUntil: 'networkidle' })
+    const d = await desk.page.evaluate(() => ({
+      bar: getComputedStyle(document.querySelector('.wa-bar')).display,
+      menu: getComputedStyle(document.querySelector('.menu')).display,
+      button: getComputedStyle(document.querySelector('.nav__menu')).display,
+    }))
+    check('[escritorio-1440] sin barra flotante ni menú a pantalla completa', d.bar === 'none' && d.menu === 'none' && d.button === 'none', JSON.stringify(d))
+    await desk.context.close()
+  }
+}
+
+// Móvil y tableta: barra, portada y cinta como un solo fondo verde. Con el video en pausa se
+// comparan píxeles reales justo encima y debajo del borde de la barra (mismo verde), en el borde
+// inferior de la portada y en la cuña izquierda sobre la cinta inclinada (exactamente el verde de
+// la cinta). La barra sigue opaca al desplazarse.
+async function checkMobileSeams(browser) {
+  const near = (a, b, tol = 3) => a.every((v, i) => Math.abs(v - b[i]) <= tol)
+  for (const vp of VIEWPORTS.filter((v) => ['movil-320', 'movil-375', 'movil-390', 'movil-430', 'tableta-768'].includes(v.name))) {
+    const { context, page } = await newPage(browser, vp, { deviceScaleFactor: 1 })
+    await page.goto(URL_BASE, { waitUntil: 'networkidle' })
+    await page.waitForTimeout(1500)
+    await page.evaluate(async () => {
+      const v = document.querySelector('.hero__video')
+      v.pause()
+      await new Promise((r) => {
+        v.addEventListener('seeked', r, { once: true })
+        v.currentTime = 0.3
+      })
+    })
+    const geo = await page.evaluate(() => {
+      const nav = document.querySelector('.nav').getBoundingClientRect()
+      const hero = document.querySelector('header#top').getBoundingClientRect()
+      return { nav: nav.bottom + scrollY, hero: hero.bottom + scrollY, w: document.documentElement.clientWidth }
+    })
+    const b64 = (await page.screenshot({ fullPage: true })).toString('base64')
+    const px = await page.evaluate(
+      async ([b64, points]) => {
+        const img = new Image()
+        img.src = `data:image/png;base64,${b64}`
+        await img.decode()
+        const c = document.createElement('canvas')
+        c.width = img.width
+        c.height = img.height
+        const ctx = c.getContext('2d')
+        ctx.drawImage(img, 0, 0)
+        return points.map(([x, y]) => [...ctx.getImageData(Math.round(x), Math.round(y), 1, 1).data.slice(0, 3)])
+      },
+      [
+        b64,
+        [
+          [geo.w / 2, geo.nav - 2],
+          [geo.w / 2, geo.nav + 2],
+          [geo.w - 4, geo.nav + 2],
+          [4, geo.hero - 1],
+          [geo.w / 2, geo.hero - 1],
+          [2, geo.hero + 2],
+        ],
+      ],
+    )
+    const [navIn, heroTop, heroTopR, bottomL, bottomC, wedge] = px
+    const forest = [14, 40, 27]
+    const ink = [28, 43, 34]
+    check(
+      `[${vp.name}] barra y portada con el mismo verde, sin corte`,
+      near(navIn, forest) && near(heroTop, forest) && near(heroTopR, forest),
+      JSON.stringify({ barra: navIn, portada: heroTop, portadaDerecha: heroTopR }),
+    )
+    check(
+      `[${vp.name}] la portada termina en el verde de la cinta, también en la cuña inclinada`,
+      near(bottomL, ink) && near(bottomC, ink) && near(wedge, ink),
+      JSON.stringify({ bordeIzquierdo: bottomL, bordeCentro: bottomC, cuña: wedge }),
+    )
+    const scrolled = await page.evaluate(async () => {
+      window.scrollTo({ top: 1200, behavior: 'instant' })
+      await new Promise((r) => setTimeout(r, 400))
+      const s = getComputedStyle(document.querySelector('.nav'))
+      return { bg: s.backgroundColor, border: s.borderBottomColor }
+    })
+    check(
+      `[${vp.name}] la barra sigue verde y opaca al desplazarse, sin línea inferior`,
+      scrolled.bg === 'rgb(14, 40, 27)' && /rgba\(.*, 0\)|transparent/.test(scrolled.border),
+      JSON.stringify(scrolled),
+    )
+    await context.close()
+  }
+}
+
 fs.mkdirSync(SHOTS, { recursive: true })
 const server = await startPreview()
 const browser = await chromium.launch({ executablePath: CHROME, headless: true })
@@ -721,10 +1092,15 @@ try {
   await checkContentAndLinks(browser)
   await checkKeyboard(browser)
   await checkMobileMenu(browser)
+  await checkSmoothScroll(browser)
+  await checkSmoothScroll(browser, true)
   await checkLayoutShift(browser)
   await checkHeroVideo(browser)
   await checkReducedMotion(browser)
   await checkHeroContrast(browser)
+  await checkMobileExtras(browser)
+  await checkMobileExtras(browser, true)
+  await checkMobileSeams(browser)
 } finally {
   await browser.close()
   server?.kill()

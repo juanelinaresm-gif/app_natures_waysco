@@ -12,6 +12,8 @@
   --amber: #f2a422;
   --text-2: #33433a;
   --text-3: #4a5b50;
+  /* Verde bosque de la barra y la portada en móvil y tableta (componentes RGB, para usar con alfa). */
+  --forest: 14, 40, 27;
   --font: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
   /* Márgenes fluidos: 20 px en móvil, 32 px (valor del diseño) desde ~640 px. */
   --pad-x: clamp(20px, 5vw, 32px);
@@ -28,13 +30,25 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Margen de las anclas bajo la barra fija: su alto real (--nav-h, lo publica Header.tsx), con un
+   respaldo por ancho mientras carga el script. Aplica a enlaces, foco con teclado y hash al cargar. */
 html {
-  scroll-padding-top: 80px; /* alto de la barra fija */
+  scroll-padding-top: var(--nav-h, 80px);
 }
 
 @media (max-width: 767px) {
   html {
-    scroll-padding-top: 76px;
+    scroll-padding-top: var(--nav-h, 68px);
+    /* La barra flotante de WhatsApp ocupa el borde inferior: el foco con teclado no queda debajo. */
+    scroll-padding-bottom: 88px;
+  }
+}
+
+/* Desplazamiento suave para toda navegación interna (barra, menú móvil, portada, pie y enlace de
+   salto), sin JavaScript ni intercepción del scroll manual. Con movimiento reducido, salto directo. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
