@@ -1,7 +1,7 @@
-/* Portada. En todos los tamaños el video es el fondo a sangre y el título va en tres líneas.
-   Escritorio (≥ 960 px): degradado claro horizontal y texto oscuro. Móvil y tableta: composición
-   de la vista móvil del diseño (video en la mitad inferior), sobre el verde bosque de la barra,
-   que sigue sin corte y se aclara sobre el video, con texto claro. (El diseño pasa a escritorio desde 721 px, pero entre 721 y 959 px el
+/* Portada. En todos los tamaños el video es el fondo a sangre, el título va en tres líneas y el
+   texto oscuro va encima, sobre un degradado crema (#faf6ee, el fondo de la página) que se funde
+   con el video. Escritorio (≥ 960 px): degradado horizontal. Móvil y tableta: vista móvil del
+   diseño, con degradado vertical y el video en la mitad inferior. (El diseño pasa a escritorio desde 721 px, pero entre 721 y 959 px el
    texto quedaría sobre el tarro y no se leería.) */
 
 .hero__inner {
@@ -136,7 +136,7 @@
     display: flex;
     align-items: flex-start;
     overflow: hidden;
-    background: rgb(var(--forest));
+    background: #faf6ee;
   }
 
   .hero__inner {
@@ -160,7 +160,7 @@
   /* Tres líneas a todo el ancho: el mayor tamaño con el que «que se integra» cabe en una línea
      (5,45 em a -0,06 em de interletra, con un 1,6 % de margen): 64 px a 393 px de ancho, 51 px a
      320 px. En pantallas bajas (móvil en horizontal) lo limita el alto, para que los botones
-     queden sobre el verde pleno. */
+     queden sobre el crema. */
   .hero__title {
     font-size: min(18cqi, 96px, 12svh);
     line-height: 0.88;
@@ -172,25 +172,11 @@
     margin-block: 0 -0.06em;
   }
 
-  /* Texto claro sobre el verde; lima y naranja más claros que en escritorio para leerse en él. */
-  .hero__title {
-    color: #faf6ee;
-  }
-
-  .hero__green {
-    color: #b2dd57;
-  }
-
-  .hero__amber {
-    color: #f7b23b;
-  }
-
   .hero__lead {
     font-size: 18px;
     line-height: 1.45;
     max-width: 300px;
     margin: 18px 0 0;
-    color: #e6ede3;
   }
 
   .hero__actions {
@@ -202,7 +188,6 @@
   .hero__cta {
     padding: 0 24px;
     font-size: 16px;
-    color: #1c2b22;
   }
 
   /* «Ver productos»: enlace subrayado junto al botón, con área táctil completa. */
@@ -212,7 +197,6 @@
     border: 0;
     border-radius: 0;
     font-size: 16px;
-    color: #faf6ee;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
@@ -224,7 +208,7 @@
   }
 
   /* El video ocupa el 70 % inferior de la portada (la parte de arriba queda bajo el degradado
-     verde): así se ve el 40 % del ancho del cuadro en vez del 28 %, con menos zoom. Su borde
+     crema): así se ve el 40 % del ancho del cuadro en vez del 28 %, con menos zoom. Su borde
      superior se funde con el fondo. */
   .hero__media {
     position: absolute;
@@ -240,41 +224,29 @@
     object-fit: cover;
   }
 
-  /* Verde bosque de la barra arriba (sin corte con ella), que se aclara sobre el video. */
+  /* Crema de la página arriba, que se aclara sobre el video hasta dejarlo ver por completo. */
   .hero__fade-x {
     display: block;
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgb(var(--forest)) 0%,
-      rgba(var(--forest), 0.94) 50%,
-      rgba(var(--forest), 0.4) 65%,
-      rgba(var(--forest), 0) 80%
+      #faf6ee 0%,
+      rgba(250, 246, 238, 0.94) 45%,
+      rgba(250, 246, 238, 0.4) 62%,
+      rgba(250, 246, 238, 0) 78%
     );
   }
 
-  /* Unión con la cinta: transparente al principio y, en el borde inferior, exactamente su verde
-     (#1c2b22). Corta, con la mayor parte de la transición al final, para no tapar el producto. */
+  /* Abajo, el video se funde con el crema de la página, como en escritorio. */
   .hero__fade-y {
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: clamp(56px, 16vw, 96px);
-    background: linear-gradient(
-      180deg,
-      rgba(28, 43, 34, 0) 0,
-      rgba(28, 43, 34, 0.25) 40%,
-      rgba(28, 43, 34, 0.7) 75%,
-      #1c2b22 100%
-    );
-  }
-
-  /* Foco visible sobre el verde (el turquesa general apenas se distingue). */
-  .hero :focus-visible {
-    outline-color: #faf6ee;
+    height: 120px;
+    background: linear-gradient(0deg, #faf6ee, rgba(250, 246, 238, 0));
   }
 
   /* Como en la vista móvil del diseño: sin control de pausa, el video queda en bucle. */
@@ -284,7 +256,7 @@
 }
 
 /* Pantallas bajas (móvil en horizontal, zoom): el texto ocupa más proporción del alto, así que el
-   verde pleno llega más abajo y el video empieza después de los botones. */
+   crema llega más abajo y el video empieza después de los botones. */
 @media (max-width: 959px) and (max-height: 540px) and (orientation: landscape) {
   .hero__media {
     top: 45%;
@@ -293,10 +265,10 @@
   .hero__fade-x {
     background: linear-gradient(
       180deg,
-      rgb(var(--forest)) 0%,
-      rgba(var(--forest), 0.94) 62%,
-      rgba(var(--forest), 0.4) 76%,
-      rgba(var(--forest), 0) 88%
+      #faf6ee 0%,
+      rgba(250, 246, 238, 0.94) 62%,
+      rgba(250, 246, 238, 0.4) 76%,
+      rgba(250, 246, 238, 0) 88%
     );
   }
 }
@@ -430,7 +402,7 @@
 @media (hover: hover) and (pointer: fine) and (max-width: 959px) {
   .hero__ghost:hover {
     background: none;
-    color: #b2dd57;
+    color: #0e5e75;
     transform: none;
   }
 }

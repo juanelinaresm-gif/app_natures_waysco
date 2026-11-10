@@ -109,64 +109,26 @@
   background: #f2a422;
 }
 
-/* Móvil y tableta (< 960 px, donde la portada es verde): la barra usa el mismo verde bosque que
-   la parte superior de la portada, opaco y sin línea inferior, y forma un solo fondo con ella.
-   El logo va en una píldora crema: su fondo blanco se funde con ella (multiply) y sus colores no
-   cambian. */
-@media (max-width: 959px) {
-  .nav {
-    background: rgb(var(--forest));
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    border-bottom-color: transparent !important; /* el borde que se muestra al desplazarse */
-  }
-
-  .nav__logo {
-    background: #faf6ee;
-    border-radius: 999px;
-    padding: 6px 14px;
-  }
-
-  .nav__logo-img {
-    height: 32px;
-  }
-
-  .nav__link {
-    color: #faf6ee;
-  }
-
-  .nav :focus-visible {
-    outline-color: #faf6ee;
-  }
-}
-
-/* Móvil: logo y botón redondo (vista móvil del diseño); el botón lleva un borde claro sutil para
-   distinguirse sobre el verde. */
+/* Vista móvil del diseño: barra clara con su línea inferior, logo y botón redondo. La línea es
+   una sombra para no chocar con el borde que la barra muestra al desplazarse. */
 @media (max-width: 767px) {
+  .nav {
+    background: rgba(250, 246, 238, 0.9);
+    box-shadow: 0 1px 0 rgba(28, 43, 34, 0.08);
+  }
+
   .nav__inner {
     padding: 10px 14px 10px 20px;
   }
 
-  .nav__menu {
-    border: 1px solid rgba(250, 246, 238, 0.3);
+  .nav__logo-img {
+    height: 38px;
   }
 
   .nav__wa {
     display: none;
   }
 }
-
-/* Pantallas muy angostas: píldora del logo más compacta. */
-@media (max-width: 359px) {
-  .nav__logo {
-    padding: 6px 10px;
-  }
-
-  .nav__logo-img {
-    height: 30px;
-  }
-}
-
 
 /* Escritorio: diseño original, todo en una fila. */
 @media (min-width: 768px) {
@@ -390,11 +352,5 @@
 
   .menu__contact--ig:hover {
     color: #f2a422;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) and (max-width: 959px) {
-  .nav__link:hover {
-    color: #b2dd57;
   }
 }

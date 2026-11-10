@@ -12,8 +12,6 @@
   --amber: #f2a422;
   --text-2: #33433a;
   --text-3: #4a5b50;
-  /* Verde bosque de la barra y la portada en móvil y tableta (componentes RGB, para usar con alfa). */
-  --forest: 14, 40, 27;
   --font: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
   /* Márgenes fluidos: 20 px en móvil, 32 px (valor del diseño) desde ~640 px. */
   --pad-x: clamp(20px, 5vw, 32px);

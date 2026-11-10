@@ -825,25 +825,19 @@ async function checkReducedMotion(browser) {
 }
 
 // Contraste del texto de la portada sobre los píxeles reales (video + degradados), con el texto
-// oculto, en varios cuadros del clip. Móvil y tableta: texto claro sobre el degradado verde, con
-// sus palabras en lima y naranja, en ocho cuadros (incluidos los más claros). Escritorio: texto
-// oscuro del diseño al inicio, a la mitad y al final (sus palabras de color se reportan aparte).
+// oculto, en ocho cuadros del clip (incluidos los más claros). En todos los tamaños, texto oscuro
+// sobre el degradado crema. «integra» y «día» llevan los colores del diseño y se reportan sin
+// mínimo (informativo), igual en móvil y en escritorio.
 // El fondo de comparación es el píxel menos favorable (percentil 1 o 99) bajo cada texto.
 async function checkHeroContrast(browser) {
   const MOBILE = ['movil-320', 'movil-375', 'movil-390', 'movil-430', 'tableta-768', 'movil-horizontal-844x390', 'zoom-200']
-  const targets = (vp) =>
-    MOBILE.includes(vp.name)
-      ? [
-          ['titular', '.hero__line', 3],
-          ['«integra»', '.hero__green', 3],
-          ['«día»', '.hero__amber', 3],
-          ['texto', '.hero__lead', 4.5],
-          ['«Ver productos»', '.hero__ghost', 4.5],
-        ]
-      : [
-          ['titular', '.hero__line', 3],
-          ['texto', '.hero__lead', 4.5],
-        ]
+  const targets = (vp) => [
+    ['titular', '.hero__line', 3],
+    ['texto', '.hero__lead', 4.5],
+    ...(MOBILE.includes(vp.name) ? [['«Ver productos»', '.hero__ghost', 4.5]] : []),
+    ['«integra»', '.hero__green', null],
+    ['«día»', '.hero__amber', null],
+  ]
   const hide = '.hero__title, .hero__lead, .hero__green, .hero__amber, .hero__ghost'
   const DESKTOP = ['escritorio-1440', 'escritorio-2560']
   for (const vp of VIEWPORTS.filter((v) => [...MOBILE, ...DESKTOP].includes(v.name))) {
@@ -910,8 +904,10 @@ async function checkHeroContrast(browser) {
     const list = targets(vp)
     check(
       `[${vp.name}] contraste del texto de portada en ${times.length} cuadros del clip`,
-      list.every(([key, , min]) => worst[key].ratio >= min),
-      list.map(([key, , min]) => `${key} ${worst[key].ratio}:1 en ${worst[key].t.toFixed(1)} s (mín. ${min})`).join(', '),
+      list.every(([key, , min]) => min === null || worst[key].ratio >= min),
+      list
+        .map(([key, , min]) => `${key} ${worst[key].ratio}:1 en ${worst[key].t.toFixed(1)} s (${min === null ? 'informativo' : `mín. ${min}`})`)
+        .join(', '),
     )
     await context.close()
   }
@@ -1008,10 +1004,11 @@ async function checkMobileExtras(browser, reduced = false) {
   }
 }
 
-// Móvil y tableta: barra, portada y cinta como un solo fondo verde. Con el video en pausa se
-// comparan píxeles reales justo encima y debajo del borde de la barra (mismo verde), en el borde
-// inferior de la portada y en la cuña izquierda sobre la cinta inclinada (exactamente el verde de
-// la cinta). La barra sigue opaca al desplazarse.
+// Móvil y tableta: barra, portada y página sobre el mismo crema (#faf6ee). Con el video en pausa
+// se comparan píxeles reales justo encima y debajo del borde de la barra, en el borde inferior de
+// la portada (el video se funde con el crema) y justo debajo, en la página. Para el borde inferior
+// se ocultan la cinta (inclinada, se superpone a la última fila de la portada) y la barra flotante.
+// La barra sigue clara al desplazarse.
 async function checkMobileSeams(browser) {
   const near = (a, b, tol = 3) => a.every((v, i) => Math.abs(v - b[i]) <= tol)
   for (const vp of VIEWPORTS.filter((v) => ['movil-320', 'movil-375', 'movil-390', 'movil-430', 'tableta-768'].includes(v.name))) {
@@ -1025,6 +1022,8 @@ async function checkMobileSeams(browser) {
         v.addEventListener('seeked', r, { once: true })
         v.currentTime = 0.3
       })
+      // La barra flotante aparece en la captura de página completa, justo sobre ese borde.
+      for (const el of document.querySelectorAll('.ticker, .wa-bar')) el.style.visibility = 'hidden'
     })
     const geo = await page.evaluate(() => {
       const nav = document.querySelector('.nav').getBoundingClientRect()
@@ -1047,37 +1046,37 @@ async function checkMobileSeams(browser) {
       [
         b64,
         [
-          [geo.w / 2, geo.nav - 2],
-          [geo.w / 2, geo.nav + 2],
-          [geo.w - 4, geo.nav + 2],
+          [geo.w / 2, geo.nav - 3],
+          [geo.w / 2, geo.nav + 3],
+          [geo.w - 4, geo.nav + 3],
           [4, geo.hero - 1],
           [geo.w / 2, geo.hero - 1],
-          [2, geo.hero + 2],
+          [geo.w / 2, geo.hero + 2],
         ],
       ],
     )
-    const [navIn, heroTop, heroTopR, bottomL, bottomC, wedge] = px
-    const forest = [14, 40, 27]
-    const ink = [28, 43, 34]
+    const [navIn, heroTop, heroTopR, bottomL, bottomC, below] = px
+    const cream = [250, 246, 238]
     check(
-      `[${vp.name}] barra y portada con el mismo verde, sin corte`,
-      near(navIn, forest) && near(heroTop, forest) && near(heroTopR, forest),
+      `[${vp.name}] barra y portada con el mismo crema de la página, sin corte`,
+      near(navIn, cream) && near(heroTop, cream) && near(heroTopR, cream),
       JSON.stringify({ barra: navIn, portada: heroTop, portadaDerecha: heroTopR }),
     )
     check(
-      `[${vp.name}] la portada termina en el verde de la cinta, también en la cuña inclinada`,
-      near(bottomL, ink) && near(bottomC, ink) && near(wedge, ink),
-      JSON.stringify({ bordeIzquierdo: bottomL, bordeCentro: bottomC, cuña: wedge }),
+      `[${vp.name}] el video se funde con el crema de la página, sin corte en el borde inferior`,
+      near(bottomL, cream) && near(bottomC, cream) && near(below, cream),
+      JSON.stringify({ bordeIzquierdo: bottomL, bordeCentro: bottomC, pagina: below }),
     )
     const scrolled = await page.evaluate(async () => {
+      for (const el of document.querySelectorAll('.ticker, .wa-bar')) el.style.visibility = ''
       window.scrollTo({ top: 1200, behavior: 'instant' })
       await new Promise((r) => setTimeout(r, 400))
       const s = getComputedStyle(document.querySelector('.nav'))
-      return { bg: s.backgroundColor, border: s.borderBottomColor }
+      return { bg: s.backgroundColor }
     })
     check(
-      `[${vp.name}] la barra sigue verde y opaca al desplazarse, sin línea inferior`,
-      scrolled.bg === 'rgb(14, 40, 27)' && /rgba\(.*, 0\)|transparent/.test(scrolled.border),
+      `[${vp.name}] la barra sigue crema al desplazarse`,
+      /^rgba?\(250, 246, 238(, 0\.\d+)?\)$/.test(scrolled.bg),
       JSON.stringify(scrolled),
     )
     await context.close()
